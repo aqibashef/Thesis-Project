@@ -16,8 +16,13 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-#include<gl\GL.h>
-#include<gl\GLU.h>
+#include <gl\GL.h>
+#include <gl\GLU.h>
+
+#include<iostream>
+#include<string>
+
+using namespace std;
 
 
 // TODO: reference additional headers your program requires here
