@@ -20,3 +20,8 @@ Now you have to do the following to configure the project to run:
 </ol>
 
 Now you should be able to run the project, if other system configurations are OK.
+
+Links:
+<ul>
+<li><a href="http://opencv-srf.blogspot.com/2013/05/installing-configuring-opencv-with-vs.html">How to integrate OpenCV library with Visual Studio Project.</a></li>
+</ul>
