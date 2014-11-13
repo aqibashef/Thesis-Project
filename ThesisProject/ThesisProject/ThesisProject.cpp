@@ -22,6 +22,18 @@ bool keys[256]; // Array Used for the keyboard routine. this will help us to tra
 bool active = TRUE; // window active flag. set to true by default. 
 bool fullscreen = TRUE; // fullscreen flag. set to true by default. indicates whether the screen should be windowed or fullscreen.
 
+int screenWidth;          // screen width.
+int screenHeight;          // screen height.
+
+GLfloat rotationTriangle;  // rotation for the triangle.
+GLfloat rotationQuad;      // rotation for the cube.
+
+GLuint texture[1];
+TextureHelper textureHelper;
+
+VideoCapture videoCapture;
+
+
 // ================================================================================================================================================== //
 
 // ================================ Function prototype declaration region : all the function prototype declaration will go here. ====================== //
@@ -42,11 +54,28 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPTSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
+
+	try{
+		videoCapture.open(0);
+		if (videoCapture.isOpened()){
+			videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, 768.0f);
+			videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, 1024.0f);
+			namedWindow("Camera", CV_WINDOW_FULLSCREEN);
+		}
+
+	}
+	catch (Exception e){
+		return -1;
+	}
+
 	MSG msg;                                // Windows Message Structure
 	BOOL    done = FALSE;                         // Bool Variable To Exit Loop
 
+	screenHeight = GetSystemMetrics(SM_CYSCREEN);  // gets the height of the screen.
+	screenWidth = GetSystemMetrics(SM_CXSCREEN);   // gets the width of the screen.
+
 	// Create Our OpenGL Window
-	if (!CreateGLWindow("Thesis Project", 640, 480, 16, fullscreen))
+	if (!CreateGLWindow("Thesis Project", screenWidth, screenHeight, 16, fullscreen))
 	{
 		return 0;                           // Quit If Window Was Not Created
 	}
@@ -86,7 +115,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 				KillGLWindow();                 // Kill Our Current Window
 				fullscreen = !fullscreen;             // Toggle Fullscreen / Windowed Mode
 				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("Thesis Project", 640, 480, 16, fullscreen))
+				if (!CreateGLWindow("Thesis Project", screenWidth, screenHeight, 16, fullscreen))
 				{
 					return 0;               // Quit If Window Was Not Created
 				}
@@ -100,8 +129,20 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 // this function is used to initialize all the opengl components.
 int InitGL(GLvoid){
+
+	glViewport(0, 0, screenWidth, screenHeight); // Resize the current viewport
+	glMatrixMode(GL_PROJECTION);     // select the projection matrix
+	glLoadIdentity();                // reset the projection matrix
+
+	// Calculate theaspect ratio of the window
+	gluPerspective(45.0f, (GLfloat)screenWidth / (GLfloat)screenHeight, 0.1f, 100.0f);
+
+	glMatrixMode(GL_MODELVIEW);       // select the model view matrix
+	glLoadIdentity();                 // reset the modelview matrix
+
+	glEnable(GL_TEXTURE_2D);
 	glShadeModel(GL_SMOOTH);               // enabling smooth shader
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  // black background
+	glClearColor(0.0f, 0.0f, 0.0f, 0.1f);  // black background
 
 	glClearDepth(1.0f);                    // depth buffer setup
 	glEnable(GL_DEPTH_TEST);               // enable depth testing
@@ -270,31 +311,98 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 
 // this function is used to draw objects in the scene.
 int DrawGLScene(GLvoid){
+
+	if (!videoCapture.isOpened())
+	{
+		return FALSE;
+	}
+	else 
+	{
+		try{
+			double fps = videoCapture.get(CV_CAP_PROP_FPS);
+			cout << fps << endl;
+
+			Mat videoFrame;
+			bool isFrameRead = videoCapture.read(videoFrame);
+			if (!isFrameRead)
+			{
+				return FALSE;
+			}
+			else
+			{
+				flip(videoFrame, videoFrame, 1);
+
+				double fps = videoCapture.get(CV_CAP_PROP_FPS);
+				char text[255];
+				sprintf_s(text, "Frame Rate: %lf", fps);
+				putText(videoFrame, text, cvPoint(200, 400), CV_FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 255, 0), 1, 8, false);
+				
+				imshow("Camera", videoFrame);				
+				flip(videoFrame, videoFrame, 0);
+				cvtColor(videoFrame, videoFrame, CV_BGR2RGB);
+				textureHelper.bind(videoFrame);
+			}
+
+			if (!videoFrame.empty())
+			{
+				videoFrame.release();
+			}
+		}
+		catch (Exception e){
+			return FALSE;
+		}
+	}
+
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);         // Clear The Screen And The Depth Buffer
-	glLoadIdentity();                           // Reset The Current Modelview Matrix
-	glTranslatef(-1.5f, 0.0f, -6.0f);            // Move into space 6 units and -1.5 to the left
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glBegin(GL_TRIANGLES);                      // Begin drawing triagle
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);              // Top
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-1.0f, -1.0f, 0.0f);              // Bottom Left
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, -1.0f, 0.0f);              // Bottom Right
-	glEnd();                            // Finished Drawing The Triangle
-	glTranslatef(3.0f, 0.0f, 0.0f);                   // Move Right 3 Units
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);                      // Draw A Quad
-	glColor3f(1.0f, 1.0f, 0.0f);
-	glVertex3f(-1.0f, 1.0f, 0.0f);              // Top Left
-	glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(1.0f, 1.0f, 0.0f);              // Top Right
-	glColor3f(1.0f, 0.0f, 1.0f);
-	glVertex3f(1.0f, -1.0f, 0.0f);              // Bottom Right
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glVertex3f(-1.0f, -1.0f, 0.0f);              // Bottom Left
-	glEnd();                            // Done Drawing The Quad
-	return TRUE;                                // Everything Went OK
+	glLoadIdentity();
+	glTranslatef(-0.5f, -0.5f, -7.0f);                   // Move Right 3 Units
+	
+	glRotatef(rotationQuad, 1.0f, 0.0f, 0.0f);
+	glRotatef(rotationQuad, 0.0f, 1.0f, 0.0f);
+	glRotatef(rotationQuad, 0.0f, 0.0f, 1.0f);
+	
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, textureHelper.getTextureId());
+	
+	glBegin(GL_QUADS);
+	
+		// Front Face
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
+		// Back Face
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
+		// Top Face
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+		// Bottom Face
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Top Left Of The Texture and Quad
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+		// Right face
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+		// Left Face
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	
+	glEnd();                           // Done Drawing The Quad
+
+	rotationQuad += 0.25f;
+	glFlush();
+	return TRUE;                                 // Everything Went OK
 }
 
 // this function resizes and reinitializes the property of the opengl window when window is resized.
@@ -316,6 +424,11 @@ GLvoid ReSizeGLScene(GLsizei width, GLsizei height){
 // this function is called before closing the application to properly close the window.
 GLvoid KillGLWindow(GLvoid)
 {
+	if (videoCapture.isOpened())
+	{
+		videoCapture.release();
+	}
+
 	if (fullscreen)
 	{
 		ChangeDisplaySettings(NULL, 0); // If so Switch back to the Desktop.

@@ -1,2 +1,5 @@
-﻿  ThesisProject.cpp
+﻿  stdafx.cpp
+  ThesisProject.cpp
+  TextureHelper.cpp
+  Generating Code...
   ThesisProject.vcxproj -> D:\Study Material 2\Thesis\Thesis Project\Thesis-Project\ThesisProject\Debug\ThesisProject.exe

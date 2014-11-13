@@ -13,15 +13,24 @@
 
 // C RunTime Header Files
 #include <stdlib.h>
+#include<stdio.h>
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
 #include <gl\GL.h>
 #include <gl\GLU.h>
 
+#include "opencv2\highgui\highgui.hpp"
+#include "opencv2\core\opengl_interop.hpp"
+#include "opencv2\core\opengl_interop_deprecated.hpp"
+#include "opencv2\core\core.hpp"
+#include "opencv2\imgproc\imgproc.hpp"
+#include "opencv2\legacy\compat.hpp"
+
 #include<iostream>
 #include<string>
 
+using namespace cv;
 using namespace std;
 
 

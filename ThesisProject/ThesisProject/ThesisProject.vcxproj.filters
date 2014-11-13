@@ -30,12 +30,18 @@
     <ClInclude Include="ThesisProject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TextureHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ThesisProject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
