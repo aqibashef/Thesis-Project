@@ -58,15 +58,18 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	try{
 		videoCapture.open(0);
 		if (videoCapture.isOpened()){
-			videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, 768.0f);
-			videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, 1024.0f);
+			videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, 400.0f);
+			videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, 600.0f);
 			namedWindow("Camera", CV_WINDOW_FULLSCREEN);
+			namedWindow("Show", CV_WINDOW_FULLSCREEN);
 		}
 
 	}
 	catch (Exception e){
 		return -1;
 	}
+
+
 
 	MSG msg;                                // Windows Message Structure
 	BOOL    done = FALSE;                         // Bool Variable To Exit Loop
@@ -312,7 +315,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 // this function is used to draw objects in the scene.
 int DrawGLScene(GLvoid){
 
-	if (!videoCapture.isOpened())
+	/*if (!videoCapture.isOpened())
 	{
 		return FALSE;
 	}
@@ -321,8 +324,8 @@ int DrawGLScene(GLvoid){
 		try{
 			double fps = videoCapture.get(CV_CAP_PROP_FPS);
 			cout << fps << endl;
-
 			Mat videoFrame;
+			Mat showFrame;
 			bool isFrameRead = videoCapture.read(videoFrame);
 			if (!isFrameRead)
 			{
@@ -331,7 +334,10 @@ int DrawGLScene(GLvoid){
 			else
 			{
 				flip(videoFrame, videoFrame, 1);
-
+				cvtColor(videoFrame, showFrame, CV_RGB2GRAY);
+				
+				Canny(showFrame, showFrame, 1, 2);
+				
 				double fps = videoCapture.get(CV_CAP_PROP_FPS);
 				char text[255];
 				sprintf_s(text, "Frame Rate: %lf", fps);
@@ -339,68 +345,34 @@ int DrawGLScene(GLvoid){
 				
 				imshow("Camera", videoFrame);				
 				flip(videoFrame, videoFrame, 0);
+
+				imshow("Show", showFrame);
+				
 				cvtColor(videoFrame, videoFrame, CV_BGR2RGB);
-				textureHelper.bind(videoFrame);
+				textureHelper.bind(videoFrame);				
 			}
 
 			if (!videoFrame.empty())
 			{
 				videoFrame.release();
 			}
+			if (!showFrame.empty())
+			{
+				showFrame.release();
+			}
+			
 		}
 		catch (Exception e){
 			return FALSE;
 		}
-	}
+	}*/
 
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);         // Clear The Screen And The Depth Buffer
 	glLoadIdentity();
 	glTranslatef(-0.5f, -0.5f, -7.0f);                   // Move Right 3 Units
 	
-	glRotatef(rotationQuad, 1.0f, 0.0f, 0.0f);
-	glRotatef(rotationQuad, 0.0f, 1.0f, 0.0f);
-	glRotatef(rotationQuad, 0.0f, 0.0f, 1.0f);
 	
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textureHelper.getTextureId());
-	
-	glBegin(GL_QUADS);
-	
-		// Front Face
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
-		// Back Face
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
-		// Top Face
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
-		// Bottom Face
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Top Left Of The Texture and Quad
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-		// Right face
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
-		// Left Face
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
-	
-	glEnd();                           // Done Drawing The Quad
-
-	rotationQuad += 0.25f;
 	glFlush();
 	return TRUE;                                 // Everything Went OK
 }
