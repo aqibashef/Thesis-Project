@@ -33,6 +33,8 @@ TextureHelper textureHelper;
 
 VideoCapture videoCapture;
 
+int sampleNo = 0;
+
 
 // ================================================================================================================================================== //
 
@@ -56,13 +58,19 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 {
 
 	try{
-		videoCapture.open(0);
+		/*videoCapture.open(0);
 		if (videoCapture.isOpened()){
 			videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, 768.0f);
 			videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, 1024.0f);
 			namedWindow("Camera", CV_WINDOW_FULLSCREEN);
-		}
-
+			namedWindow("Black and White", CV_WINDOW_AUTOSIZE);
+			namedWindow("Filtered", CV_WINDOW_AUTOSIZE);
+			namedWindow("Canny Detector", CV_WINDOW_AUTOSIZE);
+		}*/
+		namedWindow("Image", CV_WINDOW_FULLSCREEN);
+		namedWindow("Black and White", CV_WINDOW_AUTOSIZE);
+		namedWindow("Filtered", CV_WINDOW_AUTOSIZE);
+		namedWindow("Canny Detector", CV_WINDOW_AUTOSIZE);
 	}
 	catch (Exception e){
 		return -1;
@@ -129,6 +137,22 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 // this function is used to initialize all the opengl components.
 int InitGL(GLvoid){
+	try{
+		Mat image = imread("sphere4.jpg");
+		int w = (int)(255.0f * (float)((float)image.cols / (float)image.rows));
+		resize(image, image, Size(w, 255));
+		imshow("Image", image);
+		cvtColor(image, image, CV_RGB2GRAY);
+		imshow("Black and White", image);
+		//Laplacian(image, image, 0);
+		GaussianBlur(image, image, Size(5, 5), 5, 5);
+		imshow("Filtered", image);
+		Canny(image, image, 50, 10);
+		imshow("Canny Detector", image);
+	}
+	catch (Exception e){
+
+	}
 
 	glViewport(0, 0, screenWidth, screenHeight); // Resize the current viewport
 	glMatrixMode(GL_PROJECTION);     // select the projection matrix
@@ -312,95 +336,181 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 // this function is used to draw objects in the scene.
 int DrawGLScene(GLvoid){
 
-	if (!videoCapture.isOpened())
-	{
-		return FALSE;
-	}
-	else 
-	{
-		try{
-			double fps = videoCapture.get(CV_CAP_PROP_FPS);
-			cout << fps << endl;
+	//if (!videoCapture.isOpened())
+	//{
+	//	return FALSE;
+	//}
+	//else 
+	//{
+	//	try{
+	//		double fps = videoCapture.get(CV_CAP_PROP_FPS);
+	//		cout << fps << endl;
 
-			Mat videoFrame;
-			bool isFrameRead = videoCapture.read(videoFrame);
-			if (!isFrameRead)
-			{
-				return FALSE;
-			}
-			else
-			{
-				flip(videoFrame, videoFrame, 1);
+	//		Mat videoFrame;
+	//		bool isFrameRead = videoCapture.read(videoFrame);
+	//		if (!isFrameRead)
+	//		{
+	//			return FALSE;
+	//		}
+	//		else
+	//		{
+	//			flip(videoFrame, videoFrame, 1);
 
-				double fps = videoCapture.get(CV_CAP_PROP_FPS);
-				char text[255];
-				sprintf_s(text, "Frame Rate: %lf", fps);
-				putText(videoFrame, text, cvPoint(200, 400), CV_FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 255, 0), 1, 8, false);
-				
-				imshow("Camera", videoFrame);				
-				flip(videoFrame, videoFrame, 0);
-				cvtColor(videoFrame, videoFrame, CV_BGR2RGB);
-				textureHelper.bind(videoFrame);
-			}
+	//			/*double fps = videoCapture.get(CV_CAP_PROP_FPS);
+	//			char text[255];
+	//			sprintf_s(text, "Frame Rate: %lf", fps);
+	//			putText(videoFrame, text, cvPoint(200, 400), CV_FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 255, 0), 1, 8, false);*/
+	//			
+	//			Mat tmp = videoFrame.clone();
+	//			imshow("Camera", tmp);
 
-			if (!videoFrame.empty())
-			{
-				videoFrame.release();
-			}
-		}
-		catch (Exception e){
-			return FALSE;
-		}
-	}
+	//			cvtColor(tmp, tmp, CV_RGB2GRAY);
+	//			imshow("Black and White", tmp);					
+
+	//			//Laplacian(tmp, tmp, 0);
+	//			//Laplacian(tmp, tmp, 0);	
+	//			GaussianBlur(tmp, tmp, Size(5, 5), 5, 5);
+	//			imshow("Filtered", tmp);
+
+	//			Canny(tmp, tmp, 50, 10);
+	//			imshow("Canny Detector", tmp);
+
+	//			flip(videoFrame, videoFrame, 0);
+	//			cvtColor(videoFrame, videoFrame, CV_BGR2RGB);
+	//			//textureHelper.bind(videoFrame);
+	//		}
+
+	//		if (!videoFrame.empty())
+	//		{
+	//			videoFrame.release();
+	//		}
+	//	}
+	//	catch (Exception e){
+	//		return FALSE;
+	//	}
+	//}
 
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);         // Clear The Screen And The Depth Buffer
 	glLoadIdentity();
 	glTranslatef(-0.5f, -0.5f, -7.0f);                   // Move Right 3 Units
 	
-	glRotatef(rotationQuad, 1.0f, 0.0f, 0.0f);
+	/*glRotatef(rotationQuad, 1.0f, 0.0f, 0.0f);
 	glRotatef(rotationQuad, 0.0f, 1.0f, 0.0f);
-	glRotatef(rotationQuad, 0.0f, 0.0f, 1.0f);
+	glRotatef(rotationQuad, 0.0f, 0.0f, 1.0f);*/
 	
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textureHelper.getTextureId());
+	//glEnable(GL_TEXTURE_2D);
+	//glBindTexture(GL_TEXTURE_2D, textureHelper.getTextureId());
 	
-	glBegin(GL_QUADS);
-	
-		// Front Face
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
-		// Back Face
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
-		// Top Face
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
-		// Bottom Face
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Top Left Of The Texture and Quad
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-		// Right face
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
-		// Left Face
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
-	
-	glEnd();                           // Done Drawing The Quad
+	//glBegin(GL_QUADS);
+	//
+	//	// Front Face
+	//	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
+	//	// Back Face
+	//	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
+	//	// Top Face
+	//	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+	//	// Bottom Face
+	//	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Top Right Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+	//	// Right face
+	//	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+	//	// Left Face
+	//	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+	//	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
+	//	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	//
+	//glEnd();                           // Done Drawing The Quad
 
-	rotationQuad += 0.25f;
+	//rotationQuad += 0.25f;
+
+	//glRotatef(rotationQuad, 1.0f, 0.0f, 0.0f);
+	//glRotatef(rotationQuad, 0.0f, 1.0f, 0.0f);
+	//glRotatef(rotationQuad, 0.0f, 0.0f, 1.0f);
+
+	//glBegin(GL_QUADS);
+	//
+	//	// Front Face
+	//	glColor3f(1.0f, 0.0f, 0.0f);
+	//	glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+	//	glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+	//	glVertex3f(1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
+	//	glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
+	//	// Back Face
+	//	glColor3f(0.0f, 1.0f, 0.0f);
+	//	glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
+	//	glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+	//	glVertex3f(1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	//	glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
+	//	// Top Face
+	//	glColor3f(0.0f, 0.0f, 1.0f);
+	//	glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	//	glVertex3f(-1.0f, 1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+	//	glVertex3f(1.0f, 1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+	//	glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+	//	// Bottom Face
+	//	glColor3f(1.0f, 1.0f, 0.0f);
+	//	glVertex3f(-1.0f, -1.0f, -1.0f);  // Top Right Of The Texture and Quad
+	//	glVertex3f(1.0f, -1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	//	glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+	//	glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+	//	// Right face
+	//	glColor3f(0.0f, 1.0f, 1.0f);
+	//	glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
+	//	glVertex3f(1.0f, 1.0f, -1.0f);  // Top Right Of The Texture and Quad
+	//	glVertex3f(1.0f, 1.0f, 1.0f);  // Top Left Of The Texture and Quad
+	//	glVertex3f(1.0f, -1.0f, 1.0f);  // Bottom Left Of The Texture and Quad
+	//	// Left Face
+	//	glColor3f(1.0f, 0.0f, 1.0f);
+	//	glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
+	//	glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
+	//	glVertex3f(-1.0f, 1.0f, 1.0f);  // Top Right Of The Texture and Quad
+	//	glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Texture and Quad
+	//
+	//glEnd();                           // Done Drawing The Quad
+
+	//rotationQuad += 0.25f;
+	
+	//try{
+	//	Mat screenShot(screenHeight, screenWidth, CV_8UC1);
+	//	glPixelStorei(GL_PACK_ALIGNMENT, (screenShot.step & 3) ? 1 : 4);
+	//	glPixelStorei(GL_PACK_ROW_LENGTH, screenShot.step / screenShot.elemSize());
+	//	glReadPixels(0, 0, screenWidth, screenHeight, GL_BGR_EXT, GL_UNSIGNED_BYTE, screenShot.data);
+	//	flip(screenShot, screenShot, 0);
+	//	//char path[500] = {'\0'};
+	//	//sprintf_s(path, "D:/Study Material 2/Thesis/Output Samples/Test Train Dataset Cube 1/%d.jpg", sampleNo);
+	//	//cvSaveImage(path, screenShot.data);
+	//	///*bool suc = imwrite(path, screenShot);
+	//	//if (suc)*/ sampleNo++;
+	//	if (!screenShot.empty()) screenShot.release();
+	//}
+	//catch (Exception e){
+
+	//}
+
+	/*float r = (float)screenWidth / (float)screenHeight;
+	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0f, 1.0f);glVertex3f(-r, r, 0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(r, r, 0);
+	glTexCoord2f(1.0f, 0.0f);  glVertex3f(r, -r, 0);
+	glTexCoord2f(0.0f, 0.0f);  glVertex3f(-r, -r, 0);
+	glEnd();*/
+
 	glFlush();
 	return TRUE;                                 // Everything Went OK
 }
@@ -466,6 +576,7 @@ GLvoid KillGLWindow(GLvoid)
 	}
 }
 
+// this is a callback function to handle window interaction like button press, mouse event etc.
 LRESULT CALLBACK WndProc(HWND    hWnd,                   // Handle For This Window
 	UINT    uMsg,                   // Message For This Window
 	WPARAM  wParam,                 // Additional Message Information
