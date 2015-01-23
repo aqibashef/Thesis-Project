@@ -6,8 +6,12 @@
 
 #include "stdafx.h"
 #include "ThesisProject.h"
+#include "queue"
+
 
 #define MAX_LOADSTRING 100
+
+#define make_pair(a,b) pair<int,int>(a,b)
 
 // ================================= Variable Region : All the global variables will be declared here with categorization =========================== //
 
@@ -20,7 +24,7 @@ HGLRC hRC = NULL; // Permanent Rendering Context
 
 bool keys[256]; // Array Used for the keyboard routine. this will help us to track multiple key press, like : "Ctrl + s"
 bool active = TRUE; // window active flag. set to true by default. 
-bool fullscreen = TRUE; // fullscreen flag. set to true by default. indicates whether the screen should be windowed or fullscreen.
+bool fullscreen = FALSE; // fullscreen flag. set to true by default. indicates whether the screen should be windowed or fullscreen.
 
 int screenWidth;          // screen width.
 int screenHeight;          // screen height.
@@ -32,6 +36,9 @@ GLuint texture[1];
 TextureHelper textureHelper;
 
 VideoCapture videoCapture;
+
+int dirX[8] = { 0, 1, 0, -1 , 1 , -1 , 1 , -1 };
+int dirY[8] = { 1, 0, -1, 0 , 1 , -1 , -1 , 1 };
 
 
 // ================================================================================================================================================== //
@@ -46,6 +53,9 @@ int DrawGLScene(GLvoid); // this is where all the drawing goes.
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height); // this function is used to handle the properties when the window is resized when full screen mode is not used.
 GLvoid KillGLWindow(GLvoid); // this function is called before closing the window.
 
+void doSomething(void); // Does Something
+vector <vector<pair<int, int> > > getShapes(Mat shapeHolder);// Gets shapes
+
 // =================================================================================================================================================== //
 
 // this function is the entry point of this project . what ever this program does, it starts from here.
@@ -54,21 +64,23 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPTSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
-
-	try{
+	//printf("Here");
+	doSomething();
+	/*try{
 		videoCapture.open(0);
 		if (videoCapture.isOpened()){
+			
 			videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, 400.0f);
 			videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, 600.0f);
-			namedWindow("Camera", CV_WINDOW_FULLSCREEN);
-			namedWindow("Show", CV_WINDOW_FULLSCREEN);
+			
+			
 		}
 
 	}
 	catch (Exception e){
 		return -1;
-	}
-
+	}*/
+	
 
 
 	MSG msg;                                // Windows Message Structure
@@ -126,6 +138,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		}
 	}
 	// Shutdown
+	
 	KillGLWindow();                             // Kill The Window
 	return (msg.wParam);                            // Exit The Program
 }
@@ -491,4 +504,102 @@ LRESULT CALLBACK WndProc(HWND    hWnd,                   // Handle For This Wind
 	}
 	// Pass All Unhandled Messages To DefWindowProc
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+}
+
+void doSomething(void)
+{
+	namedWindow("Input", CV_WINDOW_FULLSCREEN);
+	namedWindow("Output", CV_WINDOW_FULLSCREEN);
+
+	Mat image = imread("4.jpg", CV_LOAD_IMAGE_COLOR);;
+	Mat output;
+	Mat imageGrey;
+	Mat shapeHolder;
+	Mat subs;
+	
+	
+	
+	if (!image.data)                              // Check for invalid input
+	{
+		cout << "Could not open or find the image" << std::endl;
+	}
+	else
+	{
+		cout << "Found the image" << std::endl;
+		
+		cvtColor(image, imageGrey, CV_BGR2GRAY);
+		threshold(imageGrey, imageGrey, 150.0, 255.0,THRESH_BINARY);
+		Canny(imageGrey, output, 3, 150);
+		// The smallest value between threshold1 and threshold2 is used for edge linking.
+		// The largest value is used to find initial segments of strong edges
+		
+
+		dilate(output, shapeHolder ,Mat());
+		
+		//imshow("Output", imageGrey);
+
+		subtract(shapeHolder, imageGrey, shapeHolder);
+
+		imshow("Input", image);
+		imshow("Output",shapeHolder);
+		vector <vector<pair<int, int> > > foundShapes = getShapes(shapeHolder);
+		
+	}
+}
+
+vector < vector<pair<int, int> > > getShapes(Mat shapeHolder)
+{
+	vector<vector<pair<int, int> > > ret;
+	vector<pair<int, int> > elem;
+	ret.clear();
+
+	Mat check = Mat::zeros(shapeHolder.rows, shapeHolder.cols,CV_8UC1);
+
+	for (int i = 0; i < shapeHolder.rows; i++)
+	{
+		for (int j = 0; j < shapeHolder.cols; j++)
+		{
+			uchar val = shapeHolder.at<uchar>(i, j);
+			uchar curFlag = check.at<uchar>(i, j);
+			if (val == (uchar)0 || curFlag == (uchar)1 ) continue;
+			
+			elem.clear();
+
+			queue<pair<int,int>> q;
+			q.push(make_pair(i, j));
+
+			while (!q.empty())
+			{
+				pair<int, int> cur = q.front();
+				q.pop();
+				if (check.at<uchar>(cur.first, cur.second) == (uchar)1)
+					continue;
+				check.at<uchar>(cur.first, cur.second) = (uchar)1;
+				//elem.push_back(make_pair(cur.second,cur.first) );
+				elem.push_back(cur);
+
+				pair<int, int> nxt;
+
+				for (int k = 0; k < 8; k++)
+				{
+					nxt.first = cur.first + dirX[k];
+					nxt.second = cur.second + dirY[k];
+
+					if (nxt.first < 0 || nxt.first >= shapeHolder.rows || nxt.second < 0 || nxt.second >= shapeHolder.cols)
+						continue;
+					if (check.at<uchar>(nxt.first, nxt.second) == (uchar)1)
+						continue;
+					if (shapeHolder.at<uchar>(nxt.first, nxt.second) == (uchar)0)
+						continue;
+
+					q.push(nxt);
+				}
+
+			}
+			ret.push_back(elem);
+		}
+	}
+
+	
+	return ret;
 }
