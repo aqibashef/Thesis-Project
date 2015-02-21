@@ -1,0 +1,738 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="concept"></meta>
+      <meta name="DC.Title" content="NVIDIA CUDA Getting Started Guide for Microsoft Windows"></meta>
+      <meta name="abstract" content="The installation instructions for the CUDA Toolkit on MS-Windows systems."></meta>
+      <meta name="description" content="The installation instructions for the CUDA Toolkit on MS-Windows systems."></meta>
+      <meta name="DC.Coverage" content="Getting Started Guides"></meta>
+      <meta name="DC.subject" content="CUDA Windows, CUDA Windows requirements, CUDA Windows install, CUDA Windows sample, CUDA Windows install tools, CUDA Windows GPU, CUDA Windows download, CUDA Windows build, CUDA Windows programs, CUDA Windows install verification"></meta>
+      <meta name="keywords" content="CUDA Windows, CUDA Windows requirements, CUDA Windows install, CUDA Windows sample, CUDA Windows install tools, CUDA Windows GPU, CUDA Windows download, CUDA Windows build, CUDA Windows programs, CUDA Windows install verification"></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="abstract"></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>Getting Started Windows :: CUDA Toolkit Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script type="text/javascript" charset="utf-8" src="../common/scripts/tynt/tynt.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-microsoft-windows/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   </head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">CUDA Toolkit Documentation</span><form id="search" method="get" action="search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">CUDA Toolkit
+                  v6.5</a></div>
+            <div class="category"><a href="index.html" title="Getting Started Windows">Getting Started Windows</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="#introduction">1.&nbsp;Introduction</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#system-requirements">1.1.&nbsp;System Requirements</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#about-this-document">1.2.&nbsp;About This Document</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#installing-cuda-development-tools">2.&nbsp;Installing CUDA Development Tools</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#verify-you-have-cuda-enabled-system">2.1.&nbsp;Verify You Have a CUDA-Capable GPU</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#download-cuda-software">2.2.&nbsp;Download the NVIDIA CUDA Toolkit</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#install-cuda-software">2.3.&nbsp;Install the CUDA Software</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#uninstall-cuda-software">2.3.1.&nbsp;Uninstalling the CUDA Software</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#driver-model">2.4.&nbsp;Use a Suitable Driver Model</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#verify-installation">2.5.&nbsp;Verify the Installation</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#compiling-examples">2.5.1.&nbsp;Running the Compiled Examples</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#compiling-cuda-programs">3.&nbsp;Compiling CUDA Programs</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#compiling-sample-projects">3.1.&nbsp;Compiling Sample Projects</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#sample-projects">3.2.&nbsp;Sample Projects</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#build-customizations">3.3.&nbsp;Build Customizations for New Projects</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#build-customizations-for-existing-projects">3.4.&nbsp;Build Customizations for Existing Projects</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#additional-considerations">4.&nbsp;Additional Considerations</a></div>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="release-info">Getting Started Windows
+                  (<a href="../../pdf/CUDA_Getting_Started_Windows.pdf">PDF</a>)
+                  -
+                  
+                  v6.5
+                  (<a href="https://developer.nvidia.com/cuda-toolkit-archive">older</a>)
+                  -
+                  Last updated August 1, 2014
+                  -
+                  <a href="mailto:cudatools@nvidia.com?subject=CUDA Toolkit Documentation Feedback: Getting Started Windows">Send Feedback</a>
+                  -
+                  <span class="st_facebook"></span><span class="st_twitter"></span><span class="st_linkedin"></span><span class="st_reddit"></span><span class="st_slashdot"></span><span class="st_tumblr"></span><span class="st_sharethis"></span></div>
+            </div>
+            <article id="contents">
+               <div class="topic nested0" id="abstract"><a name="abstract" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#abstract" name="abstract" shape="rect">NVIDIA CUDA Getting Started Guide for Microsoft Windows</a></h2>
+                  <div class="body conbody"></div>
+               </div>
+               <div class="topic concept nested0" id="introduction"><a name="introduction" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#introduction" name="introduction" shape="rect">1.&nbsp;Introduction</a></h2>
+                  <div class="body conbody">
+                     <p class="p">CUDA<sup>®</sup> is a parallel computing platform and programming model invented by NVIDIA. It enables dramatic increases in computing performance
+                        by harnessing the power of the graphics processing unit (GPU).
+                     </p>
+                     <div class="p">CUDA was developed with several design goals in mind:
+                        
+                        <ul class="ul">
+                           <li class="li">Provide a small set of extensions to standard programming languages, like C, that enable a straightforward implementation
+                              of parallel algorithms. With CUDA C/C﻿+﻿+, programmers can focus on the task of parallelization of the algorithms rather than
+                              spending time on their implementation.
+                           </li>
+                           <li class="li">Support heterogeneous computation where applications use both the CPU and GPU. Serial portions of applications are run on
+                              the CPU, and parallel portions are offloaded to the GPU. As such, CUDA can be incrementally applied to existing applications.
+                              The CPU and GPU are treated as separate devices that have their own memory spaces. This configuration also allows simultaneous
+                              computation on the CPU and GPU without contention for memory resources.
+                           </li>
+                        </ul>
+                        
+                        
+                        CUDA-capable GPUs have hundreds of cores that can collectively run thousands of computing threads. These cores have shared
+                        resources including a register file and a shared memory. The on-chip shared memory allows parallel tasks running on these
+                        cores to share data without sending it over the system memory bus.
+                     </div>
+                     <p class="p">This guide will show you how to install and check the correct operation of the CUDA development tools.</p>
+                  </div>
+                  <div class="topic concept nested1" id="system-requirements"><a name="system-requirements" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#system-requirements" name="system-requirements" shape="rect">1.1.&nbsp;System Requirements</a></h3>
+                     <div class="body conbody">
+                        <div class="p">To use CUDA on your system, you will need the following installed:
+                           
+                           <ul class="ul">
+                              <li class="li">A CUDA-capable GPU</li>
+                              <li class="li">A supported version of Microsoft Windows</li>
+                              <li class="li">A supported version of Microsoft Visual Studio</li>
+                              <li class="li">the NVIDIA CUDA Toolkit (available at <a class="xref" href="http://developer.nvidia.com/cuda-downloads" target="_blank" shape="rect">http://developer.nvidia.com/cuda-downloads</a>)
+                              </li>
+                           </ul>
+                        </div>
+                        <p class="p">The next two tables list the currently supported Windows operating systems and compilers.</p>
+                        <div class="tablenoborder"><a name="system-requirements__table_hrp_klk_qk" shape="rect">
+                              <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="system-requirements__table_hrp_klk_qk" class="table" frame="border" border="1" rules="all">
+                              <caption><span class="tablecap">Table 1. Windows Operating System Support in CUDA <span class="keyword">6.5</span></span></caption>
+                              <thead class="thead" align="left">
+                                 <tr class="row">
+                                    <th class="entry" align="left" valign="top" width="NaN%" id="d54e150" rowspan="1" colspan="1">Operating System</th>
+                                    <th class="entry" align="center" valign="top" width="NaN%" id="d54e153" rowspan="1" colspan="1">Native x86_64</th>
+                                    <th class="entry" align="center" valign="top" width="NaN%" id="d54e156" rowspan="1" colspan="1">Native x86_32(*)</th>
+                                    <th class="entry" align="center" valign="top" width="NaN%" id="d54e159" rowspan="1" colspan="1">Cross (x86_32 on x86_64)</th>
+                                 </tr>
+                              </thead>
+                              <tbody class="tbody">
+                                 <tr class="row">
+                                    <td class="entry" align="left" valign="top" width="NaN%" headers="d54e150" rowspan="1" colspan="1">Windows 8.1</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e153" rowspan="1" colspan="1">YES</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e156" rowspan="1" colspan="1">DEPRECATED</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e159" rowspan="1" colspan="1">YES</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" align="left" valign="top" width="NaN%" headers="d54e150" rowspan="1" colspan="1">Windows 7</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e153" rowspan="1" colspan="1">YES</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e156" rowspan="1" colspan="1">DEPRECATED</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e159" rowspan="1" colspan="1">YES</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" align="left" valign="top" width="NaN%" headers="d54e150" rowspan="1" colspan="1">Windows XP</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e153" rowspan="1" colspan="1">NO</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e156" rowspan="1" colspan="1">DEPRECATED</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e159" rowspan="1" colspan="1">NO</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" align="left" valign="top" width="NaN%" headers="d54e150" rowspan="1" colspan="1">Windows Server 2012 R2</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e153" rowspan="1" colspan="1">YES</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e156" rowspan="1" colspan="1">—</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e159" rowspan="1" colspan="1">YES</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" align="left" valign="top" width="NaN%" headers="d54e150" rowspan="1" colspan="1">Windows Server 2008 R2</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e153" rowspan="1" colspan="1">YES</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e156" rowspan="1" colspan="1">DEPRECATED</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e159" rowspan="1" colspan="1">YES</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <div class="tablenoborder">
+                           <table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+                              <caption><span class="tablecap">Table 2. Windows Compiler Support in CUDA <span class="keyword">6.5</span></span></caption>
+                              <thead class="thead" align="left">
+                                 <tr class="row">
+                                    <th class="entry" valign="top" width="NaN%" id="d54e269" rowspan="1" colspan="1">Compiler</th>
+                                    <th class="entry" valign="top" width="NaN%" id="d54e272" rowspan="1" colspan="1">IDE</th>
+                                    <th class="entry" align="center" valign="top" width="NaN%" id="d54e275" rowspan="1" colspan="1">Native x86_64</th>
+                                    <th class="entry" align="center" valign="top" width="NaN%" id="d54e278" rowspan="1" colspan="1">Native x86_32</th>
+                                    <th class="entry" align="center" valign="top" width="NaN%" id="d54e281" rowspan="1" colspan="1">Cross (x86_32 on x86_64)</th>
+                                 </tr>
+                              </thead>
+                              <tbody class="tbody">
+                                 <tr class="row">
+                                    <td class="entry" rowspan="3" valign="middle" width="NaN%" headers="d54e269" colspan="1">Visual C++ 12.0</td>
+                                    <td class="entry" valign="top" width="NaN%" headers="d54e272" rowspan="1" colspan="1">Visual Studio 2013</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e275" rowspan="1" colspan="1">YES</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e278" rowspan="1" colspan="1">DEPRECATED</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e281" rowspan="1" colspan="1">YES</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="NaN%" headers="d54e272" rowspan="1" colspan="1">Visual Studio Express 2013 for Windows Desktop</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e275" rowspan="1" colspan="1">—</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e278" rowspan="1" colspan="1">DEPRECATED</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e281" rowspan="1" colspan="1">YES</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="NaN%" headers="d54e272" rowspan="1" colspan="1">Visual Studio Express 2013 for Windows</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e275" rowspan="1" colspan="1">—</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e278" rowspan="1" colspan="1">—</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e281" rowspan="1" colspan="1">—</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="NaN%" headers="d54e269" rowspan="1" colspan="1">Visual C++ 11.0</td>
+                                    <td class="entry" valign="top" width="NaN%" headers="d54e272" rowspan="1" colspan="1">Visual Studio 2012</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e275" rowspan="1" colspan="1">YES</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e278" rowspan="1" colspan="1">DEPRECATED</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e281" rowspan="1" colspan="1">YES</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="NaN%" headers="d54e269" rowspan="1" colspan="1">Visual C++ 10.0</td>
+                                    <td class="entry" valign="top" width="NaN%" headers="d54e272" rowspan="1" colspan="1">Visual Studio 2010</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e275" rowspan="1" colspan="1">YES</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e278" rowspan="1" colspan="1">DEPRECATED</td>
+                                    <td class="entry" align="center" valign="top" width="NaN%" headers="d54e281" rowspan="1" colspan="1">YES</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <p class="p">
+                           (*) Only native development using the CUDA Toolkit on x86_32 is deprecated. Deployment and execution of CUDA applications
+                           using the CUDA Driver on x86_32 is still supported. To create 32-bit CUDA applications, use the cross-development capabilities
+                           of the CUDA Toolkit on x86_64.
+                           
+                        </p>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="about-this-document"><a name="about-this-document" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#about-this-document" name="about-this-document" shape="rect">1.2.&nbsp;About This Document</a></h3>
+                     <div class="body conbody">
+                        <p class="p">This document is intended for readers familiar with Microsoft Windows operating systems and the Microsoft Visual Studio environment.
+                           You do not need previous experience with CUDA or experience with parallel computation.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="installing-cuda-development-tools"><a name="installing-cuda-development-tools" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#installing-cuda-development-tools" name="installing-cuda-development-tools" shape="rect">2.&nbsp;Installing CUDA Development Tools</a></h2>
+                  <div class="body conbody">
+                     <div class="p">The setup of CUDA development tools on a system running the appropriate version of
+                        Windows consists of a few simple steps: 
+                        <ul class="ul">
+                           <li class="li">Verify the system has a CUDA-capable GPU.</li>
+                           <li class="li">Download the NVIDIA CUDA Toolkit.</li>
+                           <li class="li">Install the NVIDIA CUDA Toolkit.</li>
+                           <li class="li">Test that the installed software runs correctly and communicates with the hardware.</li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="verify-you-have-cuda-enabled-system"><a name="verify-you-have-cuda-enabled-system" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#verify-you-have-cuda-enabled-system" name="verify-you-have-cuda-enabled-system" shape="rect">2.1.&nbsp;Verify You Have a CUDA-Capable GPU</a></h3>
+                     <div class="body conbody">
+                        <p class="p">To verify that your GPU is CUDA-capable, open the <span class="keyword wintitle">Control Panel</span> (<span class="ph menucascade"><span class="ph uicontrol">Start</span>  &gt; <span class="ph uicontrol">Control Panel</span></span>) and double click on <span class="ph uicontrol">System</span>.&nbsp;In the <span class="keyword wintitle">System Properties</span> window that opens, click the <span class="ph uicontrol">Hardware</span> tab, then <span class="ph uicontrol">Device Manager</span>. Expand the <span class="ph uicontrol">Display adapters</span> entry. There you will find the vendor name and model of your graphics card.
+                           If it is an NVIDIA card that is listed in <a class="xref" href="http://developer.nvidia.com/cuda-gpus" target="_blank" shape="rect">http://developer.nvidia.com/cuda-gpus</a>, your GPU is CUDA-capable.
+                        </p>
+                        <p class="p">The Release Notes for the CUDA Toolkit also contain a list of supported products.</p>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="download-cuda-software"><a name="download-cuda-software" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#download-cuda-software" name="download-cuda-software" shape="rect">2.2.&nbsp;Download the NVIDIA CUDA Toolkit</a></h3>
+                     <div class="body conbody">
+                        <p class="p">The NVIDIA CUDA Toolkit is available at <a class="xref" href="http://developer.nvidia.com/cuda-downloads" target="_blank" shape="rect">http://developer.nvidia.com/cuda-downloads</a>. 
+                        </p>
+                        <p class="p">Choose the platform you are using and download the NVIDIA CUDA Toolkit</p>
+                        <p class="p">The CUDA Toolkit contains the CUDA driver and tools needed to create, build and run a CUDA application as well as libraries,
+                           header files, CUDA samples source code, and other resources.
+                        </p>
+                        <div class="section">
+                           <h3 class="title sectiontitle">Download Verification</h3>
+                           <p class="p">The download can be verified by comparing the MD5 checksum posted at <a class="xref" href="http://developer.nvidia.com/cuda-downloads/checksums" target="_blank" shape="rect">http://developer.nvidia.com/cuda-downloads/checksums</a> with that of the downloaded file. If either of the checksums differ, the downloaded file is corrupt and needs to be downloaded
+                              again.
+                           </p>
+                           <p class="p">To calculate the MD5 checksum of the downloaded file, follow the instructions at <a class="xref" href="http://support.microsoft.com/kb/889768" target="_blank" shape="rect">http://support.microsoft.com/kb/889768</a>.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="install-cuda-software"><a name="install-cuda-software" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#install-cuda-software" name="install-cuda-software" shape="rect">2.3.&nbsp;Install the CUDA Software</a></h3>
+                     <div class="body conbody">
+                        <p class="p">Before installing the toolkit, you should read the <cite class="cite">Release Notes</cite>, as they provide details on installation and software functionality.
+                        </p>
+                        <div class="note note"><span class="notetitle">Note:</span> The driver and toolkit must be installed for CUDA to function. If you have not installed a stand-alone driver, install the
+                           driver from the NVIDIA CUDA Toolkit.
+                        </div>
+                        <div class="section">
+                           <h3 class="title sectiontitle">Graphical Installation</h3>
+                           <p class="p">Install the CUDA Software by executing the CUDA installer and following the on-screen prompts.</p>
+                        </div>
+                        <div class="section">
+                           <h3 class="title sectiontitle">Silent Installation</h3>
+                           <div class="p">
+                              Alternatively, the installer can be executed in silent mode by executing the package with the <samp class="ph codeph">-s</samp> flag.
+                              Additional flags can be passed which will install specific subpackages instead of all packages.
+                              Allowed subpackage names are: CUDAToolkit_<span class="keyword">6.5</span>, CUDASamples_<span class="keyword">6.5</span>, CUDAVisualStudioIntegration_<span class="keyword">6.5</span>, and Display.Driver.
+                              For example, to install only the driver and the toolkit components:
+                              <pre class="pre screen" xml:space="preserve">&lt;PackageName&gt;.exe -s CUDAToolkit_<span class="keyword">6.5</span> Display.Driver</pre></div>
+                        </div>
+                        <div class="section">
+                           <h3 class="title sectiontitle">Subpackage Details</h3>
+                           <ul class="ul">
+                              <li class="li">
+                                 <p class="p">Display Driver</p>
+                                 <p class="p">Required to run CUDA applications.</p>
+                              </li>
+                              <li class="li">
+                                 <p class="p">CUDA Toolkit</p>
+                                 <div class="p">The CUDA Toolkit installation defaults to <samp class="ph codeph">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v<span class="keyword">6.5</span></samp>. This directory contains the following:
+                                    
+                                    <dl class="dl">
+                                       <dt class="dt dlterm"><samp class="ph codeph">Bin\</samp></dt>
+                                       <dd class="dd">the compiler executables and runtime libraries</dd>
+                                       <dt class="dt dlterm"><samp class="ph codeph">Include\</samp></dt>
+                                       <dd class="dd">the header files needed to compile CUDA programs</dd>
+                                       <dt class="dt dlterm"><samp class="ph codeph">Lib\</samp></dt>
+                                       <dd class="dd">the library files needed to link CUDA programs</dd>
+                                       <dt class="dt dlterm"><samp class="ph codeph">Doc\</samp></dt>
+                                       <dd class="dd">the CUDA documentation, including:
+                                          
+                                          <ul class="ul">
+                                             <li class="li"><cite class="cite">CUDA C Programming Guide</cite></li>
+                                             <li class="li"><cite class="cite">CUDA C Best Practices Guide</cite></li>
+                                             <li class="li">documentation for the CUDA libraries</li>
+                                             <li class="li">other CUDA Toolkit-related documentation</li>
+                                          </ul>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                              </li>
+                              <li class="li">
+                                 <p class="p">CUDA Visual Studio Integration</p>
+                                 <p class="p">The CUDA Visual Studio Integration registers the CUDA plugins with the supported and installed versions of Visual Studio on
+                                    the system. If not on Windows XP, it will also install Nsight Visual Studio Edition. This integration allows for CUDA development
+                                    within Visual Studio.
+                                    
+                                 </p>
+                              </li>
+                              <li class="li">
+                                 <p class="p">CUDA Samples</p>
+                                 <p class="p">The CUDA Samples contain source code for many example problems and templates with Microsoft Visual Studio 2010, 2012, and
+                                    2013 projects.
+                                 </p>
+                                 <p class="p">On Windows XP, the CUDA Samples installation defaults to <samp class="ph codeph">C:\Documents and Settings\All Users\Application Data\NVIDIA Corporation\CUDA Samples\v<span class="keyword">6.5</span></samp>.
+                                 </p>
+                                 <p class="p">On Windows 7, Windows 8.1, Windows Server 2008 R2, and Windows Server 2012 R2, the CUDA Samples installation defaults to <samp class="ph codeph">C:\ProgramData\NVIDIA Corporation\CUDA Samples\v<span class="keyword">6.5</span></samp>.
+                                 </p>
+                                 <div class="note note"><span class="notetitle">Note:</span><samp class="ph codeph">C:\ProgramData\</samp> is a hidden folder. It can be made visible within Windows Explorer by enabling it through the menu options within Windows
+                                    Explorer (Tools&nbsp;|&nbsp;Options).
+                                 </div>
+                                 <p class="p"></p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="section">
+                           <h3 class="title sectiontitle">Extracting and Inspecting the Files Manually</h3>
+                           <p class="p">Sometimes it may be desirable to extract or inspect the installable files directly, such as in enterprise deployment, or to
+                              browse the files before installation. The installation package can be extracted using a decompression tool which supports
+                              the LZMA compression method, such as <a class="xref" href="http://www.7-zip.org/" target="_blank" shape="rect">7-zip</a> or <a class="xref" href="http://www.winzip.com/" target="_blank" shape="rect">WinZip</a>.
+                           </p>
+                           <p class="p">Once extracted, the CUDA Toolkit files will be in the <samp class="ph codeph">CUDAToolkit</samp> folder, and similarily for the CUDA Samples and CUDA Visual Studio Integration. Within each directory is a .dll and .nvi
+                              file that can be ignored as they are not part of the installable files.
+                           </p>
+                           <div class="note note"><span class="notetitle">Note:</span> Accessing the files in this manner does not set up any environment settings, such as variables or Visual Studio integration.
+                              This is intended for enterprise-level deployment.
+                           </div>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="uninstall-cuda-software"><a name="uninstall-cuda-software" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#uninstall-cuda-software" name="uninstall-cuda-software" shape="rect">2.3.1.&nbsp;Uninstalling the CUDA Software</a></h3>
+                        <div class="abstract">
+                           <p class="p">All subpackages can be uninstalled through the Windows Control Panel.</p>
+                           <p class="p">On Windows XP, use the Add or Remove Programs widget to select and remove individual subpackages.</p>
+                           <p class="p">On Windows 7, Windows 8.1, Windows Server 2008 R2, and Windows Server 2012 R2, use the Programs and Features widget to select
+                              and remove individual subpackages.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="driver-model"><a name="driver-model" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#driver-model" name="driver-model" shape="rect">2.4.&nbsp;Use a Suitable Driver Model</a></h3>
+                     <div class="body conbody">
+                        <p class="p">On Windows 7 and later, the operating system provides two
+                           <dfn class="term">driver models</dfn> under which the NVIDIA Driver may
+                           operate:
+                        </p>
+                        <ul class="ul">
+                           <li class="li">The <dfn class="term">WDDM</dfn> driver model is used for display devices.
+                           </li>
+                           <li class="li">The <a class="xref" href="http://www.nvidia.com/object/software-for-tesla-products.html" target="_blank" shape="rect"><dfn class="term">Tesla Compute Cluster
+                                    (TCC)</dfn></a> mode of the NVIDIA Driver is available for
+                              non-display devices such as NVIDIA Tesla GPUs; it uses the
+                              Windows <dfn class="term">WDM</dfn> driver model.
+                           </li>
+                        </ul>
+                        <p class="p">The TCC driver mode provides a number of advantages for CUDA
+                           applications on GPUs that support this mode. For example:
+                        </p>
+                        <ul class="ul">
+                           <li class="li">TCC eliminates the timeouts that can occur when running under WDDM
+                              due to the Windows <a class="xref" href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff570087(v=vs.85).aspx" target="_blank" shape="rect">Timeout Detection and Recovery</a>
+                              mechanism for display devices.
+                           </li>
+                           <li class="li">TCC allows the use of CUDA with Windows Remote Desktop, which is
+                              not possible for WDDM devices.
+                           </li>
+                           <li class="li">TCC allows the use of CUDA from within processes running as
+                              Windows services, which is not possible for WDDM devices.
+                           </li>
+                           <li class="li">TCC reduces the latency of CUDA kernel launches.</li>
+                        </ul>
+                        <p class="p">TCC is enabled by default on most recent NVIDIA Tesla GPUs. To
+                           check which driver mode is in use and/or to switch driver modes,
+                           use the <samp class="ph codeph">nvidia-smi</samp> tool that is included with
+                           the NVIDIA Driver installation (see <samp class="ph codeph">nvidia-smi -h</samp>
+                           for details).
+                        </p>
+                        <div class="note note"><span class="notetitle">Note:</span> Keep in mind that when TCC mode is enabled for a particular
+                           GPU, that GPU <em class="ph i">cannot</em> be used as a display device.
+                        </div>
+                        <div class="note note"><span class="notetitle">Note:</span> NVIDIA GeForce GPUs do not support TCC mode.
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="verify-installation"><a name="verify-installation" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#verify-installation" name="verify-installation" shape="rect">2.5.&nbsp;Verify the Installation</a></h3>
+                     <div class="body conbody">
+                        <p class="p">Before continuing, it is important to verify that the CUDA toolkit can find and communicate correctly with the CUDA-capable
+                           hardware. To do this, you need to compile and run some of the included sample programs.
+                        </p>
+                     </div>
+                     <div class="topic concept nested2" id="compiling-examples"><a name="compiling-examples" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#compiling-examples" name="compiling-examples" shape="rect">2.5.1.&nbsp;Running the Compiled Examples</a></h3>
+                        <div class="body conbody">
+                           <p class="p">The version of the CUDA Toolkit can be checked by running <samp class="ph codeph">nvcc -V</samp> in a
+                              <span class="keyword wintitle">Command Prompt</span> window. You can display a <span class="keyword wintitle">Command
+                                 Prompt</span> window by going to:
+                           </p>
+                           <p class="p"><strong class="ph b">Start &gt; All Programs &gt; Accessories &gt; Command Prompt</strong></p>
+                           <p class="p">CUDA Samples include sample programs in both <dfn class="term">source</dfn> and <dfn class="term">compiled</dfn> form. To verify a correct configuration of the hardware and software, it is highly recommended that you run the <samp class="ph codeph">deviceQuery</samp> program located here:
+                           </p>
+                           <div class="p">Windows XP:<pre xml:space="preserve">C:\Documents and Settings\All Users\Application Data\NVIDIA Corporation\CUDA Samples\v<span class="keyword">6.5</span>\bin\win32\Release</pre></div>
+                           <div class="p">Windows 7, Windows 8.1, Windows Server 2008 R2, and Windows Server 2012 R2:<pre xml:space="preserve">C:\ProgramData\NVIDIA Corporation\CUDA Samples\v<span class="keyword">6.5</span>\bin\win32\Release</pre></div>
+                           <p class="p">This assumes that you used the default installation directory structure. (On 64-bit versions of Windows, the directory name
+                              ends with <samp class="ph codeph">\win64\Release</samp>.) If CUDA is installed and configured correctly, the output should look similar to <a class="xref" href="index.html#compiling-examples__valid-results-from-sample-cuda-devicequery-program" shape="rect">Figure 1</a>.
+                           </p>
+                           <div class="fig fignone" id="compiling-examples__valid-results-from-sample-cuda-devicequery-program"><a name="compiling-examples__valid-results-from-sample-cuda-devicequery-program" shape="rect">
+                                 <!-- --></a><span class="figcap">Figure 1. Valid Results from deviceQuery CUDA Sample</span><br clear="none"></br><div class="imagecenter"><img class="image imagecenter" src="graphics/valid-results-from-sample-cuda-devicequery-program.png" width="550" alt="Valid Results from deviceQuery CUDA Sample."></img></div><br clear="none"></br></div>
+                           <p class="p">The exact appearance and the output lines might be different on your system. The important outcomes are that a device was
+                              found, that the device(s) match what is installed in your system, and that the test passed.
+                           </p>
+                           <p class="p">If a CUDA-capable device and the CUDA Driver are installed but <samp class="ph codeph">deviceQuery</samp> reports that no CUDA-capable devices are present, ensure the deivce and driver are properly installed.
+                           </p>
+                           <p class="p">Running the <samp class="ph codeph">bandwidthTest</samp> program, located in the same directory as <samp class="ph codeph">deviceQuery</samp> above, ensures that the system and the CUDA-capable device are able to communicate correctly. The output should resemble
+                              <a class="xref" href="index.html#compiling-examples__valid-results-from-sample-cuda-bandwidthtest-program" shape="rect">Figure 2</a>.
+                           </p>
+                           <div class="fig fignone" id="compiling-examples__valid-results-from-sample-cuda-bandwidthtest-program"><a name="compiling-examples__valid-results-from-sample-cuda-bandwidthtest-program" shape="rect">
+                                 <!-- --></a><span class="figcap">Figure 2. Valid Results from bandwidthTest CUDA Sample</span><br clear="none"></br><div class="imagecenter"><img class="image imagecenter" src="graphics/valid-results-from-sample-cuda-bandwidthtest-program.png" width="550" alt="Valid Results from bandwidthTest CUDA Sample."></img></div><br clear="none"></br></div>
+                           <p class="p">The device name (second line) and the bandwidth numbers vary from system to system. The important items are the second line,
+                              which confirms a CUDA device was found, and the second-to-last line, which confirms that all necessary tests passed.
+                           </p>
+                           <p class="p">If the tests do not pass, make sure you do have a CUDA-capable NVIDIA GPU on your system and make sure it is properly installed.
+                              
+                           </p>
+                           <div class="p">To see a graphical representation of what CUDA can do, run the sample Particles executable in:
+                              
+                              <ul class="ul">
+                                 <li class="li">
+                                    <div class="p">For Windows XP:
+                                       <pre xml:space="preserve">c:\Documents and Settings\All Users\Application Data\CUDA Samples\v<span class="keyword">6.5</span>\bin\win32\Release</pre>
+                                       (or <samp class="ph codeph">…\win64\Release</samp> on 64-bit Windows)
+                                    </div>
+                                 </li>
+                                 <li class="li">
+                                    <div class="p">Windows 7, Windows 8.1, Windows Server 2008 R2, and Windows Server 2012 R2:
+                                       <pre xml:space="preserve">C:\ProgramData\NVIDIA Corporation\CUDA Samples\v<span class="keyword">6.5</span>\bin\win32\Release</pre>
+                                       (or <samp class="ph codeph">…\win64\Release</samp> on 64-bit Windows)
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="compiling-cuda-programs"><a name="compiling-cuda-programs" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#compiling-cuda-programs" name="compiling-cuda-programs" shape="rect">3.&nbsp;Compiling CUDA Programs</a></h2>
+                  <div class="body conbody">
+                     <div class="p">The project files in the CUDA Samples have been designed to provide simple, one-click builds of the programs that include
+                        all source code. To build the 32-bit or 64-bit Windows projects (for release or debug mode), use the provided <samp class="ph codeph">*.sln</samp> solution files for Microsoft Visual Studio 2010, 2012, or 2013 (and likewise for the corresponding versions of Microsoft
+                        Visual C++ Express Edition). You can use either the solution files located in each of the examples directories in
+                        <pre xml:space="preserve">C:\ProgramData\NVIDIA Corporation\CUDA Samples\v<span class="keyword">6.5</span>\&lt;category&gt;\&lt;sample_name&gt;</pre>
+                        or the global solution files <samp class="ph codeph">Samples*.sln</samp> located in
+                        <pre xml:space="preserve">C:\ProgramData\NVIDIA Corporation\CUDA Samples\v<span class="keyword">6.5</span></pre></div>
+                     <p class="p">CUDA Samples are organized according to <samp class="ph codeph">&lt;category&gt;</samp>. Each sample is organized into one of the following folders: (<samp class="ph codeph">0_Simple</samp>, <samp class="ph codeph">1_Utilities</samp>, <samp class="ph codeph">2_Graphics</samp>, <samp class="ph codeph">3_Imaging</samp>, <samp class="ph codeph">4_Finance</samp>, <samp class="ph codeph">5_Simulations</samp>, <samp class="ph codeph">6_Advanced</samp>, <samp class="ph codeph">7_CUDALibraries</samp>).
+                     </p>
+                  </div>
+                  <div class="topic concept nested1" id="compiling-sample-projects"><a name="compiling-sample-projects" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#compiling-sample-projects" name="compiling-sample-projects" shape="rect">3.1.&nbsp;Compiling Sample Projects</a></h3>
+                     <div class="body conbody">
+                        <p class="p">The <samp class="ph codeph">bandwidthTest</samp> project is a good sample project to build and run. It is
+                           located in the <samp class="ph codeph">NVIDIA Corporation\CUDA
+                              Samples\v<span class="keyword">6.5</span>\1_Utilities\bandwidthTest</samp> directory. 
+                        </p>
+                        <p class="p">The output is placed in <samp class="ph codeph">CUDA Samples\v<span class="keyword">6.5</span>\bin\win32\Release</samp>. (As mentioned
+                           previously, the <samp class="ph codeph">\win32</samp> segment of this address will be
+                           <samp class="ph codeph">\win64</samp> on 64-bit versions of Windows.) This location presumes that you used
+                           the default installation directory structure. Build the program using the appropriate solution
+                           file and run the executable. If all works correctly, the output should be similar to <a class="xref" href="index.html#compiling-examples__valid-results-from-sample-cuda-bandwidthtest-program" shape="rect">Figure 2</a>.
+                        </p>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="sample-projects"><a name="sample-projects" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#sample-projects" name="sample-projects" shape="rect">3.2.&nbsp;Sample Projects</a></h3>
+                     <div class="body conbody">
+                        <p class="p">The sample projects come in two configurations: debug and release (where release contains no debugging information) and different
+                           Visual Studio projects.
+                        </p>
+                        <p class="p">A few of the example projects require some additional setup. The <samp class="ph codeph">simpleD3D9</samp> example requires the system to have a Direct3D SDK (June 2010 or later) installed and the Visual C++ directory paths (located
+                           in <span class="ph menucascade"><span class="ph uicontrol">Tools</span> &gt; <span class="ph uicontrol">Options...</span></span>) properly configured. Consult the Direct3D documentation for additional details.
+                        </p>
+                        <p class="p">These sample projects also make use of the <samp class="ph codeph">$CUDA_PATH</samp> environment variable to locate where the CUDA Toolkit and the associated 
+                           <samp class="ph codeph">.props</samp> files are.
+                        </p>
+                        <p class="p">The environment variable is set automatically using the Build Customization <samp class="ph codeph">CUDA <span class="keyword">6.5</span>.props</samp> 
+                           file, and is installed automatically as part of the CUDA Toolkit installation process.
+                        </p>
+                        <div class="p">For Visual Studio 2010, the <samp class="ph codeph">CUDA <span class="keyword">6.5</span>.props</samp> file is installed into:
+                           <pre xml:space="preserve">C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V100\BuildCustomizations</pre></div>
+                        <div class="p">For Visual Studio 2012, the <samp class="ph codeph">CUDA <span class="keyword">6.5</span>.props</samp> file is installed into:
+                           <pre xml:space="preserve">C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\BuildCustomizations</pre></div>
+                        <div class="p">For Visual Studio 2013, the <samp class="ph codeph">CUDA <span class="keyword">6.5</span>.props</samp> file is installed into:
+                           <pre xml:space="preserve">C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations</pre></div>
+                        <p class="p">You can reference this <samp class="ph codeph">CUDA <span class="keyword">6.5</span>.props</samp> file when building your own CUDA applications.
+                        </p>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="build-customizations"><a name="build-customizations" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#build-customizations" name="build-customizations" shape="rect">3.3.&nbsp;Build Customizations for New Projects</a></h3>
+                     <div class="body conbody">
+                        <p class="p">When creating a new CUDA application, the Visual Studio project file must be configured to include CUDA build customizations.
+                           To accomplish this, click File-&gt; New | Project... NVIDIA-&gt; CUDA-&gt;, then select a template for your CUDA Toolkit version. For
+                           example, selecting the "CUDA <span class="keyword">6.5</span> Runtime" template will configure your project for use with the CUDA <span class="keyword">6.5</span> Toolkit. The new project is technically a C++ project (.vcxproj) that is preconfigured to use NVIDIA's Build Customizations.
+                           All standard capabilities of Visual Studio C++ projects will be available.
+                        </p>
+                        <p class="p">To specify a custom CUDA Toolkit location, under <strong class="ph b">CUDA C/C++</strong>, select <strong class="ph b">Common</strong>, and set the <strong class="ph b">CUDA Toolkit Custom Dir</strong> field as desired. Note that the selected toolkit must match the version of the Build Customizations.
+                        </p>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="build-customizations-for-existing-projects"><a name="build-customizations-for-existing-projects" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#build-customizations-for-existing-projects" name="build-customizations-for-existing-projects" shape="rect">3.4.&nbsp;Build Customizations for Existing Projects</a></h3>
+                     <div class="body conbody">
+                        <div class="p">When adding CUDA acceleration to existing applications, the relevant Visual Studio
+                           project files must be updated to include CUDA build customizations.
+                           			This can be done using one of the following two methods: 
+                           <ol class="ol">
+                              <li class="li">Open the Visual Studio project, right click on the project name, and select
+                                 <span class="ph uicontrol">Build Customizations...</span>, then select the CUDA Toolkit
+                                 version you would like to target.
+                              </li>
+                              <li class="li">Alternatively, you can configure your project always to build with the most
+                                 recently installed version of the CUDA Toolkit. First add a CUDA build
+                                 customization to your project as above. Then, right click on the project name
+                                 and select <span class="ph uicontrol">Properties</span>. Under <span class="ph uicontrol">CUDA
+                                    C/C++</span>, select <span class="ph uicontrol">Common</span>, and set the
+                                 <span class="ph uicontrol">CUDA Toolkit Custom Dir</span> field to
+                                 <samp class="ph codeph">$(CUDA_PATH)</samp> . Note that the <samp class="ph codeph">$(CUDA_PATH)</samp>
+                                 					environment variable is set by the installer.
+                              </li>
+                           </ol>
+                        </div>
+                        <p class="p">While Option 2 will allow your project to automatically use any new CUDA Toolkit version
+                           you may install in the future, selecting the toolkit version explicitly as in Option 1
+                           is often better in practice, because if there are new CUDA configuration options added
+                           to the build customization rules accompanying the newer toolkit, you would not see those
+                           new options using Option 2.
+                           		
+                        </p>
+                        <div class="p">If you use the <samp class="ph codeph">$(CUDA_PATH)</samp> environment variable to target a version of
+                           			the CUDA Toolkit for building, and you perform an installation or uninstallation of any
+                           			version of the CUDA Toolkit, you should validate that the <samp class="ph codeph">$(CUDA_PATH)</samp>
+                           			environment variable points to the correct installation directory of the CUDA Toolkit for
+                           			your purposes. You can access the value of the <samp class="ph codeph">$(CUDA_PATH)</samp> environment
+                           			variable via the following steps:
+                           			
+                           <ol class="ol">
+                              <li class="li">
+                                 					Open a run window from the Start Menu
+                                 				
+                              </li>
+                              <li class="li">
+                                 					Run: <pre xml:space="preserve">control sysdm.cpl</pre></li>
+                              <li class="li">
+                                 					Select the "Advanced" tab at the top of the window
+                                 				
+                              </li>
+                              <li class="li">
+                                 					Click "Environment Variables" at the bottom of the window
+                                 				
+                              </li>
+                           </ol>
+                        </div>
+                        <div class="p"><strong class="ph b">Note for advanced users:</strong> If you wish to try building your project against a newer
+                           CUDA Toolkit without making changes to any of your project files, go to the Visual
+                           Studio command prompt, change the current directory to the location of your
+                           project, and execute a command such as the following:
+                           <pre xml:space="preserve">msbuild &lt;projectname.extension&gt; /t:Rebuild /p:CudaToolkitDir="drive:/path/to/new/toolkit/"</pre></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="additional-considerations"><a name="additional-considerations" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#additional-considerations" name="additional-considerations" shape="rect">4.&nbsp;Additional Considerations</a></h2>
+                  <div class="body conbody">
+                     <p class="p">Now that you have CUDA-capable hardware and the NVIDIA CUDA Toolkit installed, you can examine and enjoy the numerous included
+                        programs. To begin using CUDA to accelerate the performance of your own applications, consult the <cite class="cite">CUDA&nbsp;C Programming Guide</cite>, located in the CUDA Toolkit documentation directory. 
+                     </p>
+                     <p class="p">A number of helpful development tools are included in the CUDA Toolkit or are available for download from the NVIDIA Developer
+                        Zone to assist you as you develop your CUDA programs, such as NVIDIA<sup>®</sup> Nsight™ Visual Studio Edition, NVIDIA Visual Profiler, and cuda-memcheck.
+                     </p>
+                     <p class="p">For technical support on programming questions, consult and participate in the developer forums at <a class="xref" href="http://developer.nvidia.com/cuda/" target="_blank" shape="rect">http://developer.nvidia.com/cuda/</a>.
+                     </p>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="notices-header"><a name="notices-header" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#notices-header" name="notices-header" shape="rect">Notices</a></h2>
+                  <div class="topic reference nested1" id="notice"><a name="notice" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#notice" name="notice" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Notice</h3>
+                           <p class="p">ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER DOCUMENTS (TOGETHER AND
+                              SEPARATELY, "MATERIALS") ARE BEING PROVIDED "AS IS." NVIDIA MAKES NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY, OR OTHERWISE
+                              WITH RESPECT TO THE MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS
+                              FOR A PARTICULAR PURPOSE. 
+                           </p>
+                           <p class="p">Information furnished is believed to be accurate and reliable. However, NVIDIA Corporation assumes no responsibility for the
+                              consequences of use of such information or for any infringement of patents or other rights of third parties that may result
+                              from its use. No license is granted by implication of otherwise under any patent rights of NVIDIA Corporation. Specifications
+                              mentioned in this publication are subject to change without notice. This publication supersedes and replaces all other information
+                              previously supplied. NVIDIA Corporation products are not authorized as critical components in life support devices or systems
+                              without express written approval of NVIDIA Corporation.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="trademarks"><a name="trademarks" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#trademarks" name="trademarks" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Trademarks</h3>
+                           <p class="p">NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation
+                              in the U.S. and other countries.  Other company and product names may be trademarks of
+                              the respective companies with which they are associated.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="copyright-past-to-present"><a name="copyright-past-to-present" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#copyright-past-to-present" name="copyright-past-to-present" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Copyright</h3>
+                           <p class="p">© <span class="ph">2009</span>-<span class="ph">2014</span> NVIDIA
+                              Corporation. All rights reserved.
+                           </p>
+                           <p class="p">This product includes software developed by the Syncro Soft SRL (http://www.sync.ro/).</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <hr id="contents-end"></hr>
+               
+            </article>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script></body>
+</html>

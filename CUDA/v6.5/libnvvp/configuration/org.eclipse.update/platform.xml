@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config transient="false" date="1409914114228">
+	<site enabled="true" updateable="true" policy="USER-EXCLUDE" url="platform:/base/">
+		<feature id="org.eclipse.rse.ssh" plugin-identifier="org.eclipse.rse.services.ssh" url="features/org.eclipse.rse.ssh_3.0.500.201305201712/" version="3.0.500.201305201712">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.user.ui" url="features/org.eclipse.equinox.p2.user.ui_2.2.0.v20121212-204731-62DG9JXTlTj-UXcQ2y3NLn6U4Z3H/" version="2.2.0.v20121212-204731-62DG9JXTlTj-UXcQ2y3NLn6U4Z3H">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.extras.feature" url="features/org.eclipse.equinox.p2.extras.feature_1.1.0.v20121211-153934-7A6FEcDiVOTg2RYDuZuFz-L2z00w/" version="1.1.0.v20121211-153934-7A6FEcDiVOTg2RYDuZuFz-L2z00w">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.rcp.feature" url="features/org.eclipse.equinox.p2.rcp.feature_1.1.0.v20121211-153934-785EoBqNKNZz-DW7sUc8hFwz00wd/" version="1.1.0.v20121211-153934-785EoBqNKNZz-DW7sUc8hFwz00wd">
+		</feature>
+		<feature id="com.nvidia.cuda.ide.editor.feature" url="features/com.nvidia.cuda.ide.editor.feature_6.5.0.201409051046/" version="6.5.0.201409051046">
+		</feature>
+		<feature id="com.nvidia.viper.feature" url="features/com.nvidia.viper.feature_6.5.0.201409051046/" version="6.5.0.201409051046">
+		</feature>
+		<feature id="com.nvidia.cuda.ide.remote.feature" url="features/com.nvidia.cuda.ide.remote.feature_6.5.0.201409051046/" version="6.5.0.201409051046">
+		</feature>
+		<feature id="org.eclipse.platform" url="features/org.eclipse.platform_3.8.1.v20130118-180812-9jF7oIBFG8eU2pim-VbIlTuQjY0RWWK3x-bv4I/" version="3.8.1.v20130118-180812-9jF7oIBFG8eU2pim-VbIlTuQjY0RWWK3x-bv4I">
+		</feature>
+		<feature id="org.eclipse.help" plugin-identifier="org.eclipse.help.base" url="features/org.eclipse.help_1.4.1.v20120912-145617-8R7xFOXFLWUl7PpMEeZNIGkb4/" version="1.4.1.v20120912-145617-8R7xFOXFLWUl7PpMEeZNIGkb4">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.core.feature" url="features/org.eclipse.equinox.p2.core.feature_1.1.0.v20121211-153934-8297FndFWmE7h7Bpz-vcqkxyKz0/" version="1.1.0.v20121211-153934-8297FndFWmE7h7Bpz-vcqkxyKz0">
+		</feature>
+		<feature id="org.eclipse.rse.local" plugin-identifier="org.eclipse.rse.services.local" url="features/org.eclipse.rse.local_2.1.400.201302062104/" version="2.1.400.201302062104">
+		</feature>
+		<feature id="org.eclipse.rse.core" url="features/org.eclipse.rse.core_3.4.1.nvidia-qualifier/" version="3.4.1.nvidia-qualifier">
+		</feature>
+		<feature id="org.eclipse.rcp" url="features/org.eclipse.rcp_3.8.2.v20130118-180157-96BuGOZFxwOAeG8Ofmqicz0tPK/" version="3.8.2.v20130118-180157-96BuGOZFxwOAeG8Ofmqicz0tPK">
+		</feature>
+	</site>
+</config>

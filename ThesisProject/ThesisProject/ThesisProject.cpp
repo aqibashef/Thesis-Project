@@ -138,7 +138,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 // this function is used to initialize all the opengl components.
 int InitGL(GLvoid){
 	try{
-		Mat image = imread("sphere4.jpg");
+		Mat image = imread("cube8.jpg");
 		int w = (int)(255.0f * (float)((float)image.cols / (float)image.rows));
 		resize(image, image, Size(w, 255));
 		imshow("Image", image);

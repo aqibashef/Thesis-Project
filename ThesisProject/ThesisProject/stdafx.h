@@ -28,6 +28,9 @@
 #include "opencv2\features2d\features2d.hpp"
 #include "opencv2\legacy\compat.hpp"
 
+#include "cudnn.h"
+
+
 #include<iostream>
 #include<string>
 

@@ -1,0 +1,1180 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="concept"></meta>
+      <meta name="DC.Title" content="NVIDIA CUDA Toolkit Release Notes"></meta>
+      <meta name="abstract" content="The Release Notes for the CUDA Toolkit."></meta>
+      <meta name="description" content="The Release Notes for the CUDA Toolkit."></meta>
+      <meta name="DC.Coverage" content="Release Notes"></meta>
+      <meta name="DC.subject" content="CUDA Toolkit, CUDA Toolkit 6.5 EA, CUDA Toolkit 6.5 EA libraries, CUDA Toolkit 6.5 EA release, CUDA Toolkit 6.5 EA installation, CUDA Toolkit issues, CUDA Toolkit core files, CUDA Toolkit resolved issues, CUDA Toolkit known issues, CUDA Toolkit documentation"></meta>
+      <meta name="keywords" content="CUDA Toolkit, CUDA Toolkit 6.5 EA, CUDA Toolkit 6.5 EA libraries, CUDA Toolkit 6.5 EA release, CUDA Toolkit 6.5 EA installation, CUDA Toolkit issues, CUDA Toolkit core files, CUDA Toolkit resolved issues, CUDA Toolkit known issues, CUDA Toolkit documentation"></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="abstract"></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>Release Notes :: CUDA Toolkit Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script type="text/javascript" charset="utf-8" src="../common/scripts/tynt/tynt.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   </head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">CUDA Toolkit Documentation</span><form id="search" method="get" action="search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">CUDA Toolkit
+                  v6.5</a></div>
+            <div class="category"><a href="index.html" title="Release Notes">Release Notes</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="#errata-title">Errata</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#errata-known-issues">Known Issues</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#overview">1.&nbsp;CUDA Toolkit Overview</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#new-features-title">2.&nbsp;New Features</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#cuda-general-new-features">2.1.&nbsp;General CUDA</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#cuda-tools-title-new-features">2.2.&nbsp;CUDA Tools</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cuda-tools-general-new-features">2.2.1.&nbsp;General CUDA Tools</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cuda-compiler-new-features">2.2.2.&nbsp;CUDA Compiler</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cuda-occupancy-calculator-new-features">2.2.3.&nbsp;CUDA Occupancy Calculator</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cupti-new-features">2.2.4.&nbsp;CUDA Profiling Tools Interface (CUPTI)</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#visual-profiler-new-features">2.2.5.&nbsp;NVIDIA Visual Profiler</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#cuda-libraries-title-new-features">2.3.&nbsp;CUDA Libraries</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cuda-libraries-general-new-features">2.3.1.&nbsp;General CUDA Libraries</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cublas-new-features">2.3.2.&nbsp;cuBLAS Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cufft-new-features">2.3.3.&nbsp;cuFFT Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cusparse-new-features">2.3.4.&nbsp;cuSPARSE Library</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#unsupported-features">3.&nbsp;Unsupported Features </a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#deprecated-features">4.&nbsp;Deprecated Features </a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#performance-improvements-title">5.&nbsp;Performance Improvements </a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#cuda-general-performance-improvements">5.1.&nbsp;General CUDA</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#cuda-libraries-title-performance-improvements">5.2.&nbsp;CUDA Libraries</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#math-performance-improvements">5.2.1.&nbsp;CUDA Math Library</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#resolved-issues-title">6.&nbsp;Resolved Issues </a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#cuda-general-resolved-issues">6.1.&nbsp;General CUDA</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#known-issues-title">7.&nbsp;Known Issues</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#armv7-linux-general-cuda-known-issues">7.1.&nbsp;Linux on ARMv7 Specific Issues</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#cuda-general-known-issues">7.2.&nbsp;General CUDA</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#cuda-tools-title-known-issues">7.3.&nbsp;CUDA Tools</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cuda-compiler-known-issues">7.3.1.&nbsp;CUDA Compiler</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cuda-gdb-known-issues">7.3.2.&nbsp;CUDA-GDB</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#nsight-ee-known-issues">7.3.3.&nbsp;Nsight Eclipse Edition</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#visual-profiler-known-issues">7.3.4.&nbsp;NVIDIA Visual Profiler</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#cuda-libraries-title-known-issues">7.4.&nbsp;CUDA Libraries</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cufft-known-issues">7.4.1.&nbsp;cuFFT Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#thrust-known-issues">7.4.2.&nbsp;Thrust Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cuda-samples-known-issues">7.4.3.&nbsp;CUDA Samples</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="release-info">Release Notes
+                  (<a href="../../pdf/CUDA_Toolkit_Release_Notes.pdf">PDF</a>)
+                  -
+                  
+                  v6.5
+                  (<a href="https://developer.nvidia.com/cuda-toolkit-archive">older</a>)
+                  -
+                  Last updated August 1, 2014
+                  -
+                  <a href="mailto:cudatools@nvidia.com?subject=CUDA Toolkit Documentation Feedback: Release Notes">Send Feedback</a>
+                  -
+                  <span class="st_facebook"></span><span class="st_twitter"></span><span class="st_linkedin"></span><span class="st_reddit"></span><span class="st_slashdot"></span><span class="st_tumblr"></span><span class="st_sharethis"></span></div>
+            </div>
+            <article id="contents">
+               <div class="topic nested0" id="abstract"><a name="abstract" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#abstract" name="abstract" shape="rect">NVIDIA CUDA Toolkit Release Notes</a></h2>
+                  <div class="body conbody"></div>
+               </div>
+               <div class="topic concept nested0" id="errata-title"><a name="errata-title" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#errata-title" name="errata-title" shape="rect">Errata</a></h2>
+                  <div class="topic concept nested1" id="errata-known-issues"><a name="errata-known-issues" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#errata-known-issues" name="errata-known-issues" shape="rect">Known Issues</a></h3>
+                     <div class="body conbody">
+                        <p class="p"> Any listed issue was not documented in the original version of these release notes. </p>
+                        <dl class="dl">
+                           <dt class="dt dlterm">Static Library Compilation Command-lines Incorrect in
+                              cuBLAS, cuSPARSE, and cuFFT Documentation 
+                           </dt>
+                           <dd class="dd">The incorrect command-lines use <samp class="ph codeph">gcc</samp> instead of
+                              <samp class="ph codeph">g++</samp> and omit the <samp class="ph codeph">cuda</samp> and
+                              <samp class="ph codeph">cudart</samp> libraries, as well as the <samp class="ph codeph">include</samp>
+                              and <samp class="ph codeph">lib</samp> directories. For example, the cuBLAS document shows
+                              this command-line: 
+                           </dd>
+                           <dd class="dd"><pre xml:space="preserve">gcc myCublasApp.c libcublas_static.a libculibos.a -o myCublasApp </pre></dd>
+                           <dd class="dd">The correct command-line in this case is as follows: </dd>
+                           <dd class="dd"><pre xml:space="preserve">g++ myCublasApp.c -lcublas_static -lculibos -lcudart_static -lcuda -o myCublasApp -I /usr/local/cuda-6.5/include -L /usr/local/cuda-6.5/lib64 </pre></dd>
+                           <dt class="dt dlterm">ARM Cross-Compilation with Nsight Eclipse Edition </dt>
+                           <dd class="dd">To use the ARM cross-compilation feature of Nsight Eclipse Edition without an
+                              ARM cross-compiler based on GCC-4.6, please create a symlink that points to the
+                              cross-compiler executable present on your system. For example, it can be done by
+                              issuing the following command: 
+                           </dd>
+                           <dd class="dd"><pre xml:space="preserve">sudo ln -sf `which arm-linux-gnueabihf-g++` /usr/bin/arm-linux-gnueabihf-g++-4.6 </pre></dd>
+                           <dt class="dt dlterm">NVIDIA Visual Profiler Timeline Color</dt>
+                           <dd class="dd">In the Visual Profiler timeline, the colors of intervals on the
+                              <span class="ph uicontrol">Compute</span> and <span class="ph uicontrol">Stream</span> timelines
+                              are incorrect. Also the timeline modes "<span class="ph uicontrol">color by stream</span>"
+                              and "<span class="ph uicontrol">color by process</span>" do not work.
+                           </dd>
+                           <dt class="dt dlterm">NVIDIA Visual Profiler on Mac OS X 10.9.3</dt>
+                           <dd class="dd">Visual Profiler events and metrics do not work correctly on Mac OS X 10.9.3.
+                              Please use Mac OS X 10.9.4 or later. <em class="ph i">This item updates information found in
+                                 Section 7.3.4.</em></dd>
+                           <dt class="dt dlterm">Building CUDA Sample "simpleCUFFT_callback"</dt>
+                           <dd class="dd">To properly build the <span class="ph filepath">simpleCUFFT_callback</span> sample, the
+                              <samp class="ph codeph">-dc compiler</samp> flag must be added to the compilation
+                              commands.
+                           </dd>
+                           <dt class="dt dlterm">CUDA Samples on AArch64 Systems</dt>
+                           <dd class="dd">On AArch64 systems, CUDA Samples using the CUDA Driver API must be built using
+                              <samp class="ph codeph">CUDA_SEARCH_PATH=/usr/lib</samp>.
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="overview"><a name="overview" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#overview" name="overview" shape="rect">1.&nbsp;CUDA Toolkit Overview</a></h2>
+                  <div class="body conbody">
+                     <p class="p">This section provides an overview of the system requirements and major components of the
+                        			CUDA Toolkit and points to component locations after installation.
+                     </p>
+                     <dl class="dl">
+                        <dt class="dt dlterm">System Requirements</dt>
+                        <dd class="dd">The CUDA Toolkit is supported for Linux, Mac OS X, and Microsoft Windows. Specific system
+                           					requirements are referenced below. <a name="overview__ul_e2j_msp_wn" shape="rect">
+                              <!-- --></a><ul class="ul" id="overview__ul_e2j_msp_wn">
+                              <li class="li">Linux: The latest information about support for the Linux platform can
+                                 							be found online at <a class="xref" href="http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-linux/index.html" target="_blank" shape="rect">http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-linux/index.html</a>.
+                              </li>
+                              <li class="li">Mac OS: The latest information about support for Mac OS X can be found
+                                 							online at <a class="xref" href="http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-mac-os-x/index.html" target="_blank" shape="rect">http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-mac-os-x/index.html</a>.
+                              </li>
+                              <li class="li">Windows: The latest information about support for Microsoft Windows can
+                                 							be found online at <a class="xref" href="http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-microsoft-windows/index.html" target="_blank" shape="rect">http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-microsoft-windows/index.html</a>.
+                              </li>
+                           </ul>
+                        </dd>
+                        <dt class="dt dlterm">Compiler</dt>
+                        <dd class="dd">The CUDA-C and CUDA-C++ compiler, <samp class="ph codeph">nvcc</samp>, is found in the
+                           						<samp class="ph codeph">bin/</samp> directory. It is built on top of the NVVM optimizer,
+                           					which is itself built on top of the LLVM compiler infrastructure. Developers who
+                           					want to target NVVM directly can do so using the Compiler SDK, which is
+                           					available in the <samp class="ph codeph">nvvm/</samp> directory.
+                        </dd>
+                        <dt class="dt dlterm">Tools</dt>
+                        <dd class="dd">The following development tools are available in the <samp class="ph codeph">bin/</samp> directory (except
+                           					for NSight Visual Studio Edition (VSE) which is installed as a plug-in to
+                           					Microsoft Visual Studio).<a name="overview__ul_iyz_wy3_tm" shape="rect">
+                              <!-- --></a><ul class="ul" id="overview__ul_iyz_wy3_tm">
+                              <li class="li">IDEs: <samp class="ph codeph">nsight</samp> (Linux, Mac OS), NSight VSE (Windows)
+                              </li>
+                              <li class="li">Debuggers: <samp class="ph codeph">cuda-memcheck</samp>, <samp class="ph codeph">cuda-gdb</samp> (Linux, Mac OS),
+                                 							NSight VSE (Windows)
+                              </li>
+                              <li class="li">Profilers: <samp class="ph codeph">nvprof</samp>, <samp class="ph codeph">nvvp</samp>, NSight VSE
+                                 							(Windows)
+                              </li>
+                              <li class="li">Utilities: <samp class="ph codeph">cuobjdump</samp>, <samp class="ph codeph">nvdisasm</samp>,
+                                 							<samp class="ph codeph">nvprune</samp></li>
+                           </ul>
+                        </dd>
+                        <dt class="dt dlterm">Libraries</dt>
+                        <dd class="dd">The scientific and utility libraries listed below are available in the <samp class="ph codeph">lib/</samp>
+                           					directory (DLLs on Windows are in <samp class="ph codeph">bin/</samp>), and their interfaces
+                           					are available in the <samp class="ph codeph">include/</samp> directory.<a name="overview__ul_ljm_jsj_tm" shape="rect">
+                              <!-- --></a><ul class="ul" id="overview__ul_ljm_jsj_tm">
+                              <li class="li"><samp class="ph codeph">cublas</samp> (BLAS)
+                              </li>
+                              <li class="li"><samp class="ph codeph">cublas_device</samp> (BLAS Kernel Interface)
+                              </li>
+                              <li class="li"><samp class="ph codeph">cuda_occupancy</samp> (Kernel Occupancy Calculation [header file implementation])
+                              </li>
+                              <li class="li"><samp class="ph codeph">cudadevrt</samp> (CUDA Device Runtime)
+                              </li>
+                              <li class="li"><samp class="ph codeph">cudart</samp> (CUDA Runtime)
+                              </li>
+                              <li class="li"><samp class="ph codeph">cufft</samp> (Fast Fourier Transform [FFT])
+                              </li>
+                              <li class="li"><samp class="ph codeph">cupti</samp> (Profiling Tools Interface)
+                              </li>
+                              <li class="li"><samp class="ph codeph">curand</samp> (Random Number Generation)
+                              </li>
+                              <li class="li"><samp class="ph codeph">cusparse</samp> (Sparse Matrix)
+                              </li>
+                              <li class="li"><samp class="ph codeph">npp</samp> (NVIDIA Performance Primitives [image and signal processing])
+                              </li>
+                              <li class="li"><samp class="ph codeph">nvblas</samp> ("Drop-in" BLAS)
+                              </li>
+                              <li class="li"><samp class="ph codeph">nvcuvid</samp> (CUDA Video Decoder [Windows, Linux])
+                              </li>
+                              <li class="li"><samp class="ph codeph">thrust</samp> (Parallel Algorithm Library [header file implementation])
+                              </li>
+                           </ul>
+                        </dd>
+                        <dt class="dt dlterm">CUDA Samples</dt>
+                        <dd class="dd">Code samples that illustrate how to use various CUDA and library APIs are available in the
+                           						<samp class="ph codeph">samples/</samp> directory on Linux and Mac OS, and are installed
+                           					to <samp class="ph codeph">C:\ProgramData\NVIDIA Corporation\CUDA Samples</samp> on Windows.
+                           					On Linux and Mac OS, the <samp class="ph codeph">samples/</samp> directory is read-only and
+                           					the samples must be copied to another location if they are to be modified.
+                           					Further instructions can be found in the Getting Started Guides for Linux and
+                           					Mac OS.
+                        </dd>
+                        <dt class="dt dlterm">Documentation</dt>
+                        <dd class="dd">The most current version of these release notes can be found online at <a class="xref" href="http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html" target="_blank" shape="rect">http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html</a>.
+                        </dd>
+                        <dd class="dd">Documentation, including Getting Started Guides, Programming Guides, API References, and
+                           					Tools Guides, can be found in PDF form in the <samp class="ph codeph">doc/pdf/</samp>
+                           					directory, or in HTML form at <samp class="ph codeph">doc/html/index.html</samp> and online at
+                           						<a class="xref" href="http://docs.nvidia.com/cuda/index.html" target="_blank" shape="rect">http://docs.nvidia.com/cuda/index.html</a>.
+                        </dd>
+                        <dt class="dt dlterm">Other</dt>
+                        <dd class="dd">The Open64 source files are controlled under terms of the GPL license. Current
+                           					and previously released versions are located at <a class="xref" href="ftp://download.nvidia.com/CUDAOpen64/" target="_blank" shape="rect">ftp://download.nvidia.com/CUDAOpen64/</a>.
+                        </dd>
+                        <dd class="dd">The CUDA-GDB source files are controlled under terms of the GPL license.<a name="overview__ul_br5_hgn_lm" shape="rect">
+                              <!-- --></a><ul class="ul" id="overview__ul_br5_hgn_lm">
+                              <li class="li">The source code for CUDA-GDB that shipped with CUDA 5.5 and subsequent
+                                 							versions is located at <a class="xref" href="https://github.com/NVIDIA/cuda-gdb" target="_blank" shape="rect">https://github.com/NVIDIA/cuda-gdb</a>.
+                              </li>
+                              <li class="li">The source code for CUDA-GDB that shipped with CUDA 5.0 and previous
+                                 							versions is located at <a class="xref" href="ftp://download.nvidia.com/CUDAOpen64/" target="_blank" shape="rect">ftp://download.nvidia.com/CUDAOpen64/</a>.
+                              </li>
+                           </ul>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="new-features-title"><a name="new-features-title" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#new-features-title" name="new-features-title" shape="rect">2.&nbsp;New
+                        Features</a></h2>
+                  <div class="body conbody">
+                     <p class="p"></p>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-general-new-features"><a name="cuda-general-new-features" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-general-new-features" name="cuda-general-new-features" shape="rect">2.1.&nbsp;General CUDA</a></h3>
+                     <div class="body conbody">
+                        <ul class="ul">
+                           <li class="li">Introduced support for the latest architecture in the
+                              Maxwell family (sm_52).
+                           </li>
+                           <li class="li">Added support for using <samp class="ph codeph">_shfl</samp> intrinsics with
+                              all first class types. User source code already implementing this feature should be
+                              guarded with <samp class="ph codeph">(CUDA_VERSION &lt;= 6000)</samp> in order to compile against
+                              CUDA 6.5.
+                           </li>
+                           <li class="li">On Linux, Xid 13 dmesg error reporting has been improved
+                              to provide more detail and also to indicate which of the various potential causes of
+                              the Xid 13 error was to blame.
+                           </li>
+                           <li class="li">The Linux <samp class="ph codeph">.run</samp> installation now comes with an
+                              uninstallation script, <samp class="ph codeph">uninstall_cuda_6.5.pl</samp>, to help with
+                              uninstalling the toolkit during conversions to Debian/RPM installations.
+                           </li>
+                           <li class="li">On Linux, stubs that applications can link against at build
+                              time have been added for each library. This removes the need to have the full
+                              library installed when building an application. In addition to the CUDA Toolkit
+                              libraries, a stub has been provided for the CUDA Driver library
+                              (<samp class="ph codeph">libcuda.so</samp>). See the <cite class="cite">NVIDIA CUDA Getting Started Guide
+                                 for LINUX</cite> for details on how to use these stubs.
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-tools-title-new-features"><a name="cuda-tools-title-new-features" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-tools-title-new-features" name="cuda-tools-title-new-features" shape="rect">2.2.&nbsp;CUDA Tools</a></h3>
+                     <div class="topic concept nested2" id="cuda-tools-general-new-features"><a name="cuda-tools-general-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-tools-general-new-features" name="cuda-tools-general-new-features" shape="rect">2.2.1.&nbsp;General CUDA Tools</a></h3>
+                        <div class="body conbody"><a name="cuda-tools-general-new-features__ul_oyy_jwr_zl" shape="rect">
+                              <!-- --></a><ul class="ul" id="cuda-tools-general-new-features__ul_oyy_jwr_zl">
+                              <li class="li">Improved support for CUDA FORTRAN in the command-line
+                                 debugging and profiling tools in the CUDA Toolkit, including new debugging support
+                                 for FORTRAN arrays (in Linux only), improved source-to-assembly code correlation,
+                                 and improved documentation. This improved support is available with PGI compiler
+                                 version 14.4 and higher. CUDA FORTRAN support is a beta feature in the CUDA 6.5
+                                 release.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cuda-compiler-new-features"><a name="cuda-compiler-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-compiler-new-features" name="cuda-compiler-new-features" shape="rect">2.2.2.&nbsp;CUDA Compiler</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">(Windows) Support has been added for the C++ compiler (VC 12)
+                                 in Microsoft Visual Studio 2013 for Windows.
+                              </li>
+                              <li class="li">The default target GPU architecture (<samp class="ph codeph">-arch</samp>)
+                                 for <samp class="ph codeph">nvcc</samp> has changed from sm_10 in previous releases to sm_20 in
+                                 this release. Note that sm_20 is not the minimum target architecture supported by
+                                 <samp class="ph codeph">nvcc</samp>, since sm_11, sm_12, and sm_13 are still valid target GPU
+                                 architectures if specified explicitly. 
+                              </li>
+                              <li class="li">A new tool in CUDA 6.5, <samp class="ph codeph">nvprune</samp>, prunes an
+                                 object to only contain the compiled code for the specified architectures (for
+                                 example, selects only the sm_35 code for <samp class="ph codeph">libcublas_static.a</samp>). See
+                                 the <cite class="cite">CUDA Binary Utilities</cite> document for more information.
+                              </li>
+                              <li class="li">(Linux) The <samp class="ph codeph">cuobjdump</samp> utility for examining
+                                 CUDA binaries is now available on Linux distributions running natively on the ARM
+                                 architecture; this includes Android OS.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cuda-occupancy-calculator-new-features"><a name="cuda-occupancy-calculator-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-occupancy-calculator-new-features" name="cuda-occupancy-calculator-new-features" shape="rect">2.2.3.&nbsp;CUDA Occupancy Calculator</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">Added CUDA occupancy calculator and occupancy-based launch
+                                 configuration API interfaces. These functions help set up execution configurations with
+                                 reasonable occupancy. 
+                                 <p class="p">The stand-alone programmatic occupancy calculator implementation,
+                                    <samp class="ph codeph">cuda_occupancy.h</samp>, is rewritten and out of beta. Note that the API has
+                                    changed significantly from the beta version included with CUDA 6.0. This file includes
+                                    stand-alone implementations of both the occupancy calculator and the occupancy-based
+                                    launch configuration functions, so applications can use them without depending on the
+                                    entire CUDA software stack.
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cupti-new-features"><a name="cupti-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cupti-new-features" name="cupti-new-features" shape="rect">2.2.4.&nbsp;CUDA Profiling Tools Interface (CUPTI)</a></h3>
+                        <div class="body conbody"><a name="cupti-new-features__ul_jy3_4dc_yl" shape="rect">
+                              <!-- --></a><ul class="ul" id="cupti-new-features__ul_jy3_4dc_yl">
+                              <li class="li">Instruction classification is done for the source-correlated
+                                 instruction execution activity <samp class="ph codeph">CUpti_ActivityInstructionExecution</samp>.
+                                 See <samp class="ph codeph">CUpti_ActivityInstructionClass</samp> for the instruction classes. 
+                              </li>
+                              <li class="li">
+                                 Two new device attributes were added to the activity
+                                 <samp class="ph codeph">CUpti_DeviceAttribute</samp>: <a name="cupti-new-features__ul_lbn_wvf_yn" shape="rect">
+                                    <!-- --></a><ul class="ul" id="cupti-new-features__ul_lbn_wvf_yn">
+                                    <li class="li"><samp class="ph codeph">CUPTI_DEVICE_ATTR_FLOP_SP_PER_CYCLE</samp>. Peak single-precision
+                                       floating-point operations that can be performed in one cycle by the
+                                       device.
+                                    </li>
+                                    <li class="li"><samp class="ph codeph">CUPTI_DEVICE_ATTR_FLOP_DP_PER_CYCLE</samp>. Peak double-precision
+                                       floating-point operations that can be performed in one cycle by the
+                                       device.
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li class="li">
+                                 Two new metric device properties were added: <a name="cupti-new-features__ul_gxl_ctm_14" shape="rect">
+                                    <!-- --></a><ul class="ul" id="cupti-new-features__ul_gxl_ctm_14">
+                                    <li class="li"><samp class="ph codeph">CUPTI_METRIC_PROPERTY_FLOP_SP</samp>. Peak single-precision
+                                       floating point operations that can be performed in one cycle by the
+                                       device.
+                                    </li>
+                                    <li class="li"><samp class="ph codeph">CUPTI_METRIC_PROPERTY_FLOP_DP</samp>. Peak double-precision
+                                       floating-point operations that can be performed in one cycle by the
+                                       device.
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li class="li">Activity record <samp class="ph codeph">CUpti_ActivityGlobalAccess2</samp>
+                                 for source-level global access information replaces
+                                 <samp class="ph codeph">CUpti_ActivityGlobalAccess</samp>, which has been deprecated. The new
+                                 record adds information needed to map SASS assembly instructions to CUDA C source
+                                 code; it also provides ideal L2 transaction counts based on access patterns. 
+                              </li>
+                              <li class="li">Activity record <samp class="ph codeph">CUpti_ActivityBranch2</samp> for
+                                 source-level branch information replaces <samp class="ph codeph">CUpti_ActivityBranch</samp>,
+                                 which has been deprecated. The new record adds information needed to map SASS
+                                 assembly instructions to CUDA C source code. 
+                              </li>
+                              <li class="li">Added a new sample to show how to map SASS assembly
+                                 instructions to CUDA C source lines. 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="visual-profiler-new-features"><a name="visual-profiler-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#visual-profiler-new-features" name="visual-profiler-new-features" shape="rect">2.2.5.&nbsp;NVIDIA Visual Profiler</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">Visual Profiler now displays peak single-precision flops and
+                                 peak double-precision flops for a GPU under <span class="ph uicontrol">Device</span>
+                                 properties. 
+                              </li>
+                              <li class="li">The Visual Profiler <span class="ph uicontrol">Kernel</span> profile
+                                 analysis view has been updated with several enhancements. <a name="visual-profiler-new-features__ul_qxh_cl1_wn" shape="rect">
+                                    <!-- --></a><ul class="ul" id="visual-profiler-new-features__ul_qxh_cl1_wn">
+                                    <li class="li">Initially, the instruction with the maximum execution count is
+                                       highlighted.
+                                    </li>
+                                    <li class="li">A bar is shown in the background of the counter value for the
+                                       <span class="ph uicontrol">Exec Count</span> column to make it easier to identify
+                                       instructions with high execution counts.
+                                    </li>
+                                    <li class="li">The current assembly instruction block is highlighted using two horizontal
+                                       lines around the block. Also, <span class="ph uicontrol">next</span> and
+                                       <span class="ph uicontrol">previous</span> buttons have been added to move to the
+                                       next or previous block of assembly instructions.
+                                    </li>
+                                    <li class="li">Syntax highlighting is done for the CUDA C source.</li>
+                                    <li class="li">A tooltip describing each column has been added.</li>
+                                 </ul>
+                              </li>
+                              <li class="li">The Visual Profiler <span class="ph uicontrol">Kernel</span> memory
+                                 analysis view has been updated with several enhancements. <a name="visual-profiler-new-features__ul_gn5_gn1_wn" shape="rect">
+                                    <!-- --></a><ul class="ul" id="visual-profiler-new-features__ul_gn5_gn1_wn">
+                                    <li class="li">Added ECC overhead, which provides a count of memory transactions required
+                                       for ECC. 
+                                    </li>
+                                    <li class="li">For L2 cache, added a split of transactions for L1 reads, L1 writes, texture
+                                       reads, atomic reads, and noncoherent reads. 
+                                    </li>
+                                    <li class="li">For L1 cache, added a count of atomic transactions.</li>
+                                 </ul>
+                              </li>
+                              <li class="li">Visual Profiler and <samp class="ph codeph">nvprof</samp> now support a new
+                                 application replay mode for collecting multiple events and metrics. In this mode,
+                                 the application is run multiple times instead of using kernel replay. This is useful
+                                 for cases when the kernel uses a large amount of device memory and the use of kernel
+                                 replay is slow due to the high overhead of saving and restoring device memory for
+                                 each kernel replay run. In Visual Profiler, this new application replay mode is
+                                 enabled in the <span class="ph uicontrol">New Session</span> dialog.  
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-libraries-title-new-features"><a name="cuda-libraries-title-new-features" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-libraries-title-new-features" name="cuda-libraries-title-new-features" shape="rect">2.3.&nbsp;CUDA Libraries</a></h3>
+                     <div class="topic concept nested2" id="cuda-libraries-general-new-features"><a name="cuda-libraries-general-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-libraries-general-new-features" name="cuda-libraries-general-new-features" shape="rect">2.3.1.&nbsp;General CUDA Libraries</a></h3>
+                        <div class="body conbody"><a name="cuda-libraries-general-new-features__ul_oyy_jwr_zl" shape="rect">
+                              <!-- --></a><ul class="ul" id="cuda-libraries-general-new-features__ul_oyy_jwr_zl">
+                              <li class="li">Starting with the CUDA 6.5 release on Linux and Mac OS, the
+                                 cuBLAS, cuSPARSE, cuFFT, cuRAND, and NPP libraries are provided as static libraries
+                                 in addition to being provided as shared libraries. These new static libraries depend
+                                 on a common thread abstraction layer library cuLIBOS (<samp class="ph codeph">libculibos.a</samp>)
+                                 that is now distributed as part of the toolkit. Consequently, cuLIBOS must be
+                                 provided to the linker when at least one of these static libraries is being linked
+                                 against. For example, on Linux, to compile an application using cuBLAS and cuRAND
+                                 against the static versions of these libraries, the following command should be
+                                 used:<pre xml:space="preserve">g++ myCublasApp.c -lcublas_static -lculibos -lcudart_static -lcuda -o myCublasApp -I /usr/local/cuda-6.5/include -L /usr/local/cuda-6.5/lib64</pre>Note
+                                 that <samp class="ph codeph">libculibos.a</samp> is <strong class="ph b">not</strong> needed when the shared version of
+                                 these libraries is used.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cublas-new-features"><a name="cublas-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cublas-new-features" name="cublas-new-features" shape="rect">2.3.2.&nbsp;cuBLAS Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">The <samp class="ph codeph">cublas&lt;T&gt;trsmBatched()</samp> routine no
+                                 longer limits the <samp class="ph codeph">m</samp> and <samp class="ph codeph">n</samp> dimensions to 32.
+                                 However, the routine is still intended to be used for matrices of relatively small
+                                 size, for which the performance of calling <samp class="ph codeph">cublas&lt;T&gt;trsm()</samp>
+                                 multiple times would be limited by kernel launch overhead. Performance has also been
+                                 significantly improved for <samp class="ph codeph">n</samp> &gt; 1.
+                              </li>
+                              <li class="li">The cuBLAS Library now offers the batched routines
+                                 <samp class="ph codeph">cublas&lt;T&gt;geqrfBatched()</samp> and
+                                 <samp class="ph codeph">cublas&lt;T&gt;gelsBatched()</samp>, which are respectively a batched QR
+                                 factorization and a batched least-squares solver for over-determined systems.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cufft-new-features"><a name="cufft-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cufft-new-features" name="cufft-new-features" shape="rect">2.3.3.&nbsp;cuFFT Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">User-specified routines can now operate directly on cuFFT input
+                                 or output data. The new <samp class="ph codeph">cufftXt*Callback()</samp> APIs are used to specify
+                                 which user-defined routines will be called when each data point is loaded or stored
+                                 by the cuFFT kernels, potentially reducing the overall number of accesses to device
+                                 memory.
+                              </li>
+                              <li class="li">Starting with cuFFT in CUDA 6.5, single 2D or 3D FFTs on
+                                 multiple GPUs can be performed without the need for transposing data between
+                                 successive FFTs. In prior releases it was necessary to transpose the data before
+                                 performing a second FFT on multiple GPUs. 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cusparse-new-features"><a name="cusparse-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cusparse-new-features" name="cusparse-new-features" shape="rect">2.3.4.&nbsp;cuSPARSE Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">The cuSPARSE Library added two new routines that support the
+                                 BSR format, <samp class="ph codeph">cusparse&lt;T&gt;bsrmm()</samp> and
+                                 <samp class="ph codeph">cusparse&lt;T&gt;bsrsm()</samp>, which are respectively the
+                                 multiplication of a matrix in BSR format by a dense matrix, and the solve of a
+                                 triangular matrix in BSR format against multiple right-hand sides.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="unsupported-features"><a name="unsupported-features" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#unsupported-features" name="unsupported-features" shape="rect">3.&nbsp;Unsupported Features
+                        </a></h2>
+                  <div class="body conbody">
+                     <p class="p"> The following features are officially unsupported in the current release. Developers
+                        must employ alternative solutions to these features in their software. 
+                     </p>
+                     <dl class="dl">
+                        <dt class="dt dlterm">Windows XP 64-bit Edition Support</dt>
+                        <dd class="dd">With this release, CUDA no longer supports the 64-bit version of the Windows XP
+                           operating system, although CUDA on the 32-bit version of Windows XP is still
+                           supported. We recommend that developers and users of the 64-bit version of
+                           Windows XP migrate to Windows 7 or Windows 8.1, which are supported in the
+                           current and future CUDA releases.
+                        </dd>
+                        <dt class="dt dlterm">Windows Vista Support</dt>
+                        <dd class="dd">This CUDA release no longer supports the Windows Vista operating system. We
+                           recommend that users and developers migrate to Windows 7 or Windows 8.1, which
+                           are supported in the current and future releases.
+                        </dd>
+                        <dt class="dt dlterm">Windows Server 2012 Support</dt>
+                        <dd class="dd">CUDA on the Windows Server 2012 operating system is not supported in this CUDA
+                           release. We recommend that users and developers migrate to Windows Server 2012
+                           R2, which is supported in the current and future releases.
+                        </dd>
+                        <dt class="dt dlterm">(Linux) Support for 32-bit Applications on
+                           x86-based Linux Distributions
+                        </dt>
+                        <dd class="dd">Several portions of the CUDA Toolkit are no longer available for developing
+                           32-bit applications on x86-based Linux distributions:<a name="unsupported-features__ul_jth_pjb_d4" shape="rect">
+                              <!-- --></a><ul class="ul" id="unsupported-features__ul_jth_pjb_d4">
+                              <li class="li">.deb installer packages for 32-bit CUDA Toolkit components </li>
+                              <li class="li">CUDA Toolkit scientific libraries, including cuBLAS, cuSPARSE, cuFFT,
+                                 cuRAND, and NPP
+                              </li>
+                              <li class="li">Thrust </li>
+                              <li class="li">Quadro and Tesla products</li>
+                              <li class="li">Tesla (sm_1x) and Fermi (sm_2x) architectures</li>
+                              <li class="li">CUDA Samples</li>
+                           </ul>
+                        </dd>
+                        <dd class="dd">The above list also applies to 32-bit components and 32-bit rpm/deb packages on
+                           64-bit x86-based Linux distributions. The 64-bit components are unaffected by
+                           these changes. 
+                        </dd>
+                        <dt class="dt dlterm">(Mac OS X) Support for 32-bit CUDA and OpenCL
+                           Applications on Mac OS X
+                        </dt>
+                        <dd class="dd">Developing and running 32-bit CUDA and OpenCL applications on Mac OS X platforms
+                           is no longer supported in the CUDA Toolkit and in the CUDA Driver. Legacy 32-bit
+                           CUDA and OpenCL applications will not run on this version of the CUDA Driver on
+                           Mac OS X platforms. 
+                        </dd>
+                        <dt class="dt dlterm">Targeting sm_10 (G80) for
+                           CUDA Applications
+                        </dt>
+                        <dd class="dd">The CUDA Toolkit no longer supports the sm_10 target architecture (the G80
+                           architecture) for CUDA and OpenCL applications. 
+                        </dd>
+                        <dt class="dt dlterm">CUDA Video Encoder (NVCUVENC)</dt>
+                        <dd class="dd">Building applications with the CUDA Video Encoder interface is no longer
+                           supported; however, the driver will continue to run applications built against
+                           this interface. We recommend using the NVIDIA Encoder API (NVENC), a newer video
+                           encoding interface that is available at <a class="xref" href="https://developer.nvidia.com/nvidia-video-codec-sdk" target="_blank" shape="rect">https://developer.nvidia.com/nvidia-video-codec-sdk</a>.
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="deprecated-features"><a name="deprecated-features" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#deprecated-features" name="deprecated-features" shape="rect">4.&nbsp;Deprecated Features
+                        </a></h2>
+                  <div class="body conbody">
+                     <p class="p">The following features are deprecated in the current release of the CUDA software. The
+                        features still work in the current release, but their documentation may have been
+                        removed, and they will become officially unsupported in a future release. We recommend
+                        that developers employ alternative solutions to these features in their software. 
+                     </p>
+                     <dl class="dl">
+                        <dt class="dt dlterm">Tesla and Quadro Products and CUDA Toolkit on
+                           32-bit Windows Platforms
+                        </dt>
+                        <dd class="dd">Support for the CUDA Toolkit on 32-bit Windows platforms is deprecated, as is
+                           support for Tesla and Quadro products for the CUDA driver on 32-bit Windows
+                           platforms. Additionally, on 64-bit Windows platforms, support for the following
+                           features for 32-bit CUDA and OpenCL applications is deprecated from the CUDA
+                           driver and CUDA toolkit, as appropriate: <a name="deprecated-features__ul_wgw_hkp_yn" shape="rect">
+                              <!-- --></a><ul class="ul" id="deprecated-features__ul_wgw_hkp_yn">
+                              <li class="li">Tesla and Quadro products</li>
+                              <li class="li">CUDA Toolkit scientific libraries, including cuBLAS, cuSPARSE, cuFFT,
+                                 cuRAND, and NPP
+                              </li>
+                              <li class="li">Thrust</li>
+                              <li class="li">CUDA samples</li>
+                           </ul>
+                        </dd>
+                        <dd class="dd">This deprecation notice doesn't impact any 64-bit components. </dd>
+                     </dl>
+                     <dl class="dl">
+                        <dt class="dt dlterm">Interop with IDirect3D9 objects on Microsoft
+                           Windows 7 and Later
+                        </dt>
+                        <dd class="dd">This release deprecates support for interop with <samp class="ph codeph">IDirect3D9</samp>
+                           objects on Windows 7 and later Microsoft operating systems. This applies to the
+                           <samp class="ph codeph">cuD3D9*()</samp> and
+                           <samp class="ph codeph">cuGraphicsD3D9RegisterResource()</samp> routines in the Driver
+                           API, as well as the corresponding <samp class="ph codeph">cudaD3D9*()</samp> and
+                           <samp class="ph codeph">cudaGraphicsD3D9RegisterResource()</samp> routines in the Runtime
+                           API. We recommend using <samp class="ph codeph">IDirect3D9ex</samp> objects, which will work
+                           with these same routines, instead.
+                        </dd>
+                     </dl>
+                     <dl class="dl">
+                        <dt class="dt dlterm">Linux RHEL 5 and CentOS 5 Support</dt>
+                        <dd class="dd">Support for CUDA on the RHEL 5 and CentOS 5 Linux distributions is deprecated in
+                           this CUDA release and will be dropped in a future release. We recommend that
+                           users and developers migrate to RHEL 6, which is supported in the current and
+                           future releases.
+                        </dd>
+                     </dl>
+                     <dl class="dl">
+                        <dt class="dt dlterm">Support for sm_10, sm_11, sm_12, and sm_13
+                           Architectures
+                        </dt>
+                        <dd class="dd">The sm_10 architecture is deprecated within the CUDA Driver, and the sm_11,
+                           sm_12, and sm_13 architectures are deprecated within the CUDA Toolkit and the
+                           CUDA Driver. Support for these architectures will be removed in the next major
+                           version of the CUDA Toolkit and Driver. Note that support for the sm_10
+                           architecture has already been removed from the CUDA Toolkit.
+                        </dd>
+                     </dl>
+                     <dl class="dl">
+                        <dt class="dt dlterm">Developing and Running 32-bit CUDA and OpenCL
+                           Applications on x86 Linux Platforms
+                        </dt>
+                        <dd class="dd">Support for developing and running 32-bit CUDA and OpenCL applications on x86
+                           Linux platforms is deprecated. This implies the following:<a name="deprecated-features__ul_xcb_nhp_yn" shape="rect">
+                              <!-- --></a><ul class="ul" id="deprecated-features__ul_xcb_nhp_yn">
+                              <li class="li">Support is currently still available in the toolkit and driver.</li>
+                              <li class="li">Support may be dropped from the toolkit in a future release, and
+                                 similarly from the driver.
+                              </li>
+                              <li class="li">New features may not have support for 32-bit x86 Linux
+                                 applications.
+                              </li>
+                              <li class="li">This notice applies to running applications on a 32-bit Linux kernel,
+                                 and also to running 32-bit applications on a 64-bit Linux kernel.
+                              </li>
+                              <li class="li">This notice applies to x86 architectures only; 32-bit Linux applications
+                                 are still officially supported and are not deprecated on the ARM
+                                 architecture. 
+                              </li>
+                           </ul>
+                        </dd>
+                     </dl>
+                     <dl class="dl">
+                        <dt class="dt dlterm">CUPTI Activity Records</dt>
+                        <dd class="dd">Activity record <samp class="ph codeph">CUpti_ActivityGlobalAccess</samp> for source-level
+                           global access information has been deprecated and replaced by the new activity
+                           record <samp class="ph codeph">CUpti_ActivityGlobalAccess2</samp>. Activity record
+                           <samp class="ph codeph">CUpti_ActivityBranch</samp> for source-level branch information
+                           has been deprecated and replaced by the new activity record
+                           <samp class="ph codeph">CUpti_ActivityBranch2</samp>. 
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="performance-improvements-title"><a name="performance-improvements-title" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#performance-improvements-title" name="performance-improvements-title" shape="rect">5.&nbsp;Performance Improvements
+                        </a></h2>
+                  <div class="topic concept nested1" id="cuda-general-performance-improvements"><a name="cuda-general-performance-improvements" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-general-performance-improvements" name="cuda-general-performance-improvements" shape="rect">5.1.&nbsp;General CUDA</a></h3>
+                     <div class="body conbody">
+                        <ul class="ul">
+                           <li class="li">MPS performance has been improved: launch performance has been
+                              improved from 7 to 5 microseconds; launch and synchronize performance has been
+                              improved from 35 to 15 microseconds. 
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-libraries-title-performance-improvements"><a name="cuda-libraries-title-performance-improvements" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-libraries-title-performance-improvements" name="cuda-libraries-title-performance-improvements" shape="rect">5.2.&nbsp;CUDA Libraries</a></h3>
+                     <div class="topic concept nested2" id="math-performance-improvements"><a name="math-performance-improvements" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#math-performance-improvements" name="math-performance-improvements" shape="rect">5.2.1.&nbsp;CUDA Math Library</a></h3>
+                        <div class="body conbody"><a name="math-performance-improvements__ul_fq4_jfq_wn" shape="rect">
+                              <!-- --></a><ul class="ul" id="math-performance-improvements__ul_fq4_jfq_wn">
+                              <li class="li">Performance has been increased for these single-precision
+                                 functions in CUDA 6.5: <samp class="ph codeph">acoshf()</samp>, <samp class="ph codeph">asinhf()</samp>,
+                                 <samp class="ph codeph">atanf()</samp>, <samp class="ph codeph">atan2f()</samp>, <samp class="ph codeph">atanhf()</samp>,
+                                 <samp class="ph codeph">cyl_bessel_i0f()</samp>, <samp class="ph codeph">cyl_bessel_i1f()</samp>,
+                                 <samp class="ph codeph">cbrtf()</samp>, <samp class="ph codeph">coshf()</samp>, <samp class="ph codeph">erfcf()</samp>,
+                                 <samp class="ph codeph">erfcinvf()</samp>, <samp class="ph codeph">erfcxf()</samp>,
+                                 <samp class="ph codeph">erfinvf()</samp>, <samp class="ph codeph">expf()</samp>, <samp class="ph codeph">exp10f()</samp>,
+                                 <samp class="ph codeph">expm1f()</samp>, <samp class="ph codeph">fdiv_rd()</samp>,
+                                 <samp class="ph codeph">fdiv_rn()</samp>, <samp class="ph codeph">fdiv_ru()</samp>,
+                                 <samp class="ph codeph">fdiv_rz()</samp>, <samp class="ph codeph">fmodf()</samp>,
+                                 <samp class="ph codeph">frcp_rd()</samp>, <samp class="ph codeph">frcp_rn()</samp>, <samp class="ph codeph">frcp_ru()</samp>,
+                                 <samp class="ph codeph">frcp_rz()</samp>, <samp class="ph codeph">frsqrt_rn()</samp>,
+                                 <samp class="ph codeph">hypotf()</samp>, <samp class="ph codeph">logf()</samp>, <samp class="ph codeph">log10f()</samp>,
+                                 <samp class="ph codeph">log1pf()</samp>, <samp class="ph codeph">log2f()</samp>,
+                                 <samp class="ph codeph">normcdff()</samp>, <samp class="ph codeph">normcdfinvf()</samp>,
+                                 <samp class="ph codeph">powf()</samp>, <samp class="ph codeph">remainderf()</samp>, <samp class="ph codeph">remquof()</samp>,
+                                 <samp class="ph codeph">rhypotf()</samp>, <samp class="ph codeph">sincospif()</samp>,
+                                 <samp class="ph codeph">sinhf()</samp>, <samp class="ph codeph">sinpif()</samp>, and
+                                 <samp class="ph codeph">tanhf()</samp>. 
+                                 <p class="p">Of these single-precision functions,
+                                    <samp class="ph codeph">atanf()</samp>, <samp class="ph codeph">expf()</samp>,
+                                    <samp class="ph codeph">exp10f()</samp>, <samp class="ph codeph">expm1f()</samp>, <samp class="ph codeph">hypotf()</samp>,
+                                    and <samp class="ph codeph">rhypotf()</samp> show especially marked improvement. 
+                                 </p>
+                              </li>
+                              <li class="li">Performance has been increased for these
+                                 double-precision functions in CUDA 6.5: <samp class="ph codeph">acosh()</samp>,
+                                 <samp class="ph codeph">asin()</samp>, <samp class="ph codeph">asinh()</samp>, <samp class="ph codeph">atan()</samp>,
+                                 <samp class="ph codeph">atanh()</samp>, cyl_bessel_i0, <samp class="ph codeph">cyl_bessel_i1()</samp>,
+                                 <samp class="ph codeph">cbrt()</samp>, <samp class="ph codeph">cospi()</samp>, <samp class="ph codeph">div()</samp>,
+                                 <samp class="ph codeph">erfc()</samp>, <samp class="ph codeph">erfcx()</samp>, <samp class="ph codeph">erfinv()</samp>,
+                                 <samp class="ph codeph">exp2()</samp>, <samp class="ph codeph">fmod()</samp>, <samp class="ph codeph">hypot()</samp>,
+                                 <samp class="ph codeph">log()</samp>, <samp class="ph codeph">log10()</samp>, <samp class="ph codeph">log1p()</samp>,
+                                 <samp class="ph codeph">log2()</samp>, <samp class="ph codeph">normcdf()</samp>, pow(),
+                                 <samp class="ph codeph">rcbrt()</samp>, <samp class="ph codeph">remainder()</samp>,
+                                 <samp class="ph codeph">remquo()</samp>, <samp class="ph codeph">rhypot()</samp>,
+                                 <samp class="ph codeph">sincospi()</samp>, <samp class="ph codeph">sinpi()</samp>, and
+                                 <samp class="ph codeph">tan()</samp>. 
+                                 <p class="p">Of these double-precision functions,
+                                    <samp class="ph codeph">acosh()</samp>, <samp class="ph codeph">atan()</samp>, <samp class="ph codeph">cbrt()</samp>,
+                                    <samp class="ph codeph">hypot()</samp>, and <samp class="ph codeph">rhypot()</samp> show especially
+                                    marked improvement.
+                                 </p>
+                              </li>
+                              <li class="li">Performance of the double-precision square root function,
+                                 <samp class="ph codeph">sqrt()</samp>, was significantly improved for GPUs with compute
+                                 capability 2.0 and above. 
+                              </li>
+                              <li class="li">Performance of the double-precision reciprocal square root
+                                 function, <samp class="ph codeph">rsqrt()</samp>, was significantly improved for GPUs with compute
+                                 capability 2.0 and above. 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="resolved-issues-title"><a name="resolved-issues-title" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#resolved-issues-title" name="resolved-issues-title" shape="rect">6.&nbsp;Resolved Issues
+                        </a></h2>
+                  <div class="topic concept nested1" id="cuda-general-resolved-issues"><a name="cuda-general-resolved-issues" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-general-resolved-issues" name="cuda-general-resolved-issues" shape="rect">6.1.&nbsp;General CUDA</a></h3>
+                     <div class="body conbody">
+                        <ul class="ul">
+                           <li class="li">(Linux) A driver packaging issue that forced users on Redhat
+                              and Fedora to ensure that the <samp class="ph codeph">xorg-x11-drv-nvidia-devel</samp> package was
+                              installed has been resovled.
+                           </li>
+                           <li class="li">The device memory heap size, set using
+                              <samp class="ph codeph">cudaDeviceSetLimit(cudaLimitMallocHeapSize, *)</samp> or
+                              <samp class="ph codeph">cuCtxSetLimit(CU_LIMIT_MALLOC_HEAP_SIZE, *)</samp>, is no longer
+                              limited to a size of 4,294,967,296 (4 GB).
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="known-issues-title"><a name="known-issues-title" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#known-issues-title" name="known-issues-title" shape="rect">7.&nbsp;Known Issues</a></h2>
+                  <div class="topic concept nested1" id="armv7-linux-general-cuda-known-issues"><a name="armv7-linux-general-cuda-known-issues" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#armv7-linux-general-cuda-known-issues" name="armv7-linux-general-cuda-known-issues" shape="rect">7.1.&nbsp;Linux on ARMv7 Specific Issues</a></h3>
+                     <div class="body conbody">
+                        <ul class="ul">
+                           <li class="li">Mapping host memory allocated outside
+                              of CUDA to device memory is not allowed on ARM; because of this,
+                              <samp class="ph codeph">cudaHostRegister()</samp> is not supported by the CUDA driver on ARM
+                              platforms. If required, <samp class="ph codeph">cudaHostAlloc()</samp> with the flag
+                              <samp class="ph codeph">cudaHostAllocMapped</samp> can be used to allocate device-mapped
+                              host-accessible memory.
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-general-known-issues"><a name="cuda-general-known-issues" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-general-known-issues" name="cuda-general-known-issues" shape="rect">7.2.&nbsp;General CUDA</a></h3>
+                     <div class="body conbody">
+                        <ul class="ul">
+                           <li class="li">The <samp class="ph codeph">cuda</samp> and
+                              <samp class="ph codeph">gpu-deployment-kit</samp> packages must be installed by separate
+                              executions of <samp class="ph codeph">yum</samp>. See the <cite class="cite">Linux Getting Started Guide</cite>
+                              for more details.
+                           </li>
+                           <li class="li">On openSUSE and SLES, X will fail to load if the CUDA Toolkit
+                              RPM packages are installed using relocation immediately following an installation of
+                              the <samp class="ph codeph">cuda-drivers</samp> package (and its dependencies). Users should
+                              reboot in between the driver and toolkit installations. Executing
+                              <samp class="ph codeph">nvidia-xconfig</samp> may rescue a system where X has failed to load
+                              in this situation.
+                           </li>
+                           <li class="li">The CUDA drivers may fail to install if the RPMFusion
+                              repository is enabled at the same time as the CUDA repository. When installing CUDA,
+                              the <samp class="ph codeph">--disablerepo="rpmfusion-nonfree*"</samp> option should be used. For
+                              example, to install the <samp class="ph codeph">cuda</samp> package: <samp class="ph codeph">yum
+                                 --disablerepo="rpmfusion-nonfree*" install cuda</samp>.
+                           </li>
+                           <li class="li">(Mac OS) When CUDA applications are run on 2012 MacBook Pro
+                              models, allowing or forcing the system to go to sleep causes a system crash (kernel
+                              panic). To prevent the computer from automatically going to sleep, set the
+                              <span class="ph uicontrol">Computer Sleep</span> option slider to
+                              <span class="ph uicontrol">Never</span> in the <span class="ph uicontrol">Energy Saver</span> pane of
+                              the <span class="ph uicontrol">System Preferences</span>.
+                           </li>
+                           <li class="li">The CUDA reference manual incorrectly describes the
+                              type of <samp class="ph codeph">CUdeviceptr</samp> as an <samp class="ph codeph">unsigned int</samp> on all
+                              platforms. On 64-bit platforms, a <samp class="ph codeph">CUdeviceptr</samp> is an
+                              <samp class="ph codeph">unsigned long long</samp>, not an <samp class="ph codeph">unsigned int</samp>. 
+                           </li>
+                           <li class="li">Peer access is disabled between two devices if either
+                              of them is in SLI mode. 
+                           </li>
+                           <li class="li">On multi-GPU configurations without P2P support
+                              between any pair of devices that support Unified Memory, managed memory allocations
+                              are placed in zero-copy memory. When data is migrated, this results in lower
+                              performance than the default managed memory behavior. In certain cases, the
+                              environment variable <samp class="ph codeph">CUDA_MANAGED_FORCE_DEVICE_ALLOC</samp> can be set to
+                              force managed allocations to be in device memory and to enable migration on these
+                              hardware configurations. Normally, using the environment variable
+                              <samp class="ph codeph">CUDA_VISIBLE_DEVICES</samp> is recommended to restrict CUDA to only
+                              use those GPUs that have P2P support. Please refer to the environment variables
+                              section in the <cite class="cite">CUDA C Programming Guide</cite> for further details.
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-tools-title-known-issues"><a name="cuda-tools-title-known-issues" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-tools-title-known-issues" name="cuda-tools-title-known-issues" shape="rect">7.3.&nbsp;CUDA Tools</a></h3>
+                     <div class="topic concept nested2" id="cuda-compiler-known-issues"><a name="cuda-compiler-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-compiler-known-issues" name="cuda-compiler-known-issues" shape="rect">7.3.1.&nbsp;CUDA Compiler</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">
+                                 (Mac OS) When Clang is used as the host compiler,
+                                 32-bit target compilation on OS X is not supported. This is because the Clang
+                                 compiler doesn't support the <samp class="ph codeph">-malign-double</samp> switch that the NVCC
+                                 compiler needs to properly align double-precision structure fields when compiling
+                                 for a 32-bit target (GCC does support this switch). Note that GCC is the default
+                                 host compiler used by NVCC on OS X 10.8 and Clang is the default on OS X 10.9. 
+                              </li>
+                              <li class="li">
+                                 The NVCC compiler doesn't accept Unicode
+                                 characters in any filename or path provided as a command-line parameter. 
+                              </li>
+                              <li class="li">
+                                 A CUDA program may not compile correctly if
+                                 a <samp class="ph codeph">type</samp> or <samp class="ph codeph">typedef</samp><samp class="ph codeph">T</samp> is private to a class or a structure, and at least one of the
+                                 following is satisfied: <a name="cuda-compiler-known-issues__ul_e4m_jgt_5n" shape="rect">
+                                    <!-- --></a><ul class="ul" id="cuda-compiler-known-issues__ul_e4m_jgt_5n">
+                                    <li class="li"><samp class="ph codeph">T</samp> is a parameter type for a <samp class="ph codeph">__global__</samp>
+                                       function.
+                                    </li>
+                                    <li class="li"><samp class="ph codeph">T</samp> is an argument type for a template instantiation of a
+                                       <samp class="ph codeph">__global__</samp> function.
+                                    </li>
+                                 </ul>
+                                 
+                                 This restriction will be fixed in a future release. 
+                              </li>
+                              <li class="li">
+                                 (Mac OS) The documentation surrounding the use of the
+                                 flag <samp class="ph codeph">-malign-double</samp> suggests it be used to make the struct size the
+                                 same between host and device code. We know now that this flag causes problems with
+                                 other host libraries. The CUDA documentation will be updated to reflect this. The
+                                 workaround for this issue is to manually add padding so that the structs between the
+                                 host compiler and CUDA are consistent. 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cuda-gdb-known-issues"><a name="cuda-gdb-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-gdb-known-issues" name="cuda-gdb-known-issues" shape="rect">7.3.2.&nbsp;CUDA-GDB</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">There can be a significant performance degradation for large
+                                 routines when the debugger steps over inlined routines. This happens because inlined
+                                 code blocks may have multiple exit points under the hood, and the debugger steps
+                                 every single instruction until an exit point is reached.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="nsight-ee-known-issues"><a name="nsight-ee-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#nsight-ee-known-issues" name="nsight-ee-known-issues" shape="rect">7.3.3.&nbsp;Nsight Eclipse Edition</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">On Linux, the NVIDIA Visual Profiler
+                                 (<samp class="ph codeph">nvvp</samp>) and the Nsight IDE (<samp class="ph codeph">nsight</samp>) do not run
+                                 properly when the oxygen-gtk theme is used. If you experience such crashes, please
+                                 uninstall the oxygen-gtk theme. The command to do this on OpenSUSE is <samp class="ph codeph">sudo
+                                    zypper rm gtk2-theme-oxygen</samp> and on Ubuntu is <samp class="ph codeph">sudo apt-get
+                                    remove gtk2-engines-oxygen</samp>. 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="visual-profiler-known-issues"><a name="visual-profiler-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#visual-profiler-known-issues" name="visual-profiler-known-issues" shape="rect">7.3.4.&nbsp;NVIDIA Visual Profiler</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">(Windows) Using the mouse wheel button to scroll does
+                                 not work within the Visual Profiler on Windows.
+                              </li>
+                              <li class="li">(Mac OS) Visual Profiler events and
+                                 metrics do not work correctly on Mac OS X 10.9.3. Mac OS X 10.9.2 can be used as a
+                                 workaround.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-libraries-title-known-issues"><a name="cuda-libraries-title-known-issues" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-libraries-title-known-issues" name="cuda-libraries-title-known-issues" shape="rect">7.4.&nbsp;CUDA Libraries</a></h3>
+                     <div class="topic concept nested2" id="cufft-known-issues"><a name="cufft-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cufft-known-issues" name="cufft-known-issues" shape="rect">7.4.1.&nbsp;cuFFT Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">In the CUDA 6.5 Early Access release, there are some
+                                 limitations in the cuFFT callback implementation. <a name="cufft-known-issues__ul_wd4_lt3_yn" shape="rect">
+                                    <!-- --></a><ul class="ul" id="cufft-known-issues__ul_wd4_lt3_yn">
+                                    <li class="li">The static version of the cuFFT library is not supported on 32-bit Windows
+                                       systems; consequently, the callback feature is not supported there
+                                       either.
+                                    </li>
+                                    <li class="li">If the size of any dimension cannot be factored into a combination of powers
+                                       of 2, 3, 5, and 7 (that is, the size has a prime factor of 11 or greater),
+                                       the callback routine cannot safely call
+                                       <samp class="ph codeph">__syncthreads()</samp>.
+                                    </li>
+                                    <li class="li">For 2D and 3D transforms, if the size of any dimension has a prime factor of
+                                       131 or greater, <samp class="ph codeph">cufftUnsetCallback()</samp> does not function
+                                       correctly.
+                                    </li>
+                                    <li class="li">For 2D and 3D C2C transforms, if any dimension has a prime factor of 131 or
+                                       greater, the <samp class="ph codeph">store()</samp> callback does not function
+                                       correctly.
+                                    </li>
+                                    <li class="li">For multi-GPU C2R and R2C plans, callbacks are not supported if the batch
+                                       size is greater than one and any dimension has a prime factor of 131 or
+                                       greater. 
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="thrust-known-issues"><a name="thrust-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#thrust-known-issues" name="thrust-known-issues" shape="rect">7.4.2.&nbsp;Thrust Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">(Linux) There is a known issue that causes the
+                                 <samp class="ph codeph">TestGetTemporaryBufferDispatchExplicit</samp> and
+                                 <samp class="ph codeph">TestGetTemporaryBufferDispatchImplicit</samp> unit tests provided with
+                                 the Thrust library to fail on the SLES 11 Linux distribution.
+                              </li>
+                              <li class="li">(Linux) There is a known issue that causes the
+                                 <samp class="ph codeph">segmentationTreeThrust</samp> CUDA sample in the
+                                 <samp class="ph codeph">6_Advanced</samp> directory to fail on the SLES 11 Linux
+                                 distribution.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cuda-samples-known-issues"><a name="cuda-samples-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-samples-known-issues" name="cuda-samples-known-issues" shape="rect">7.4.3.&nbsp;CUDA Samples</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">On 32-bit Windows systems, certain samples may fail to compile
+                                 due to the compiler exhausting available memory, especially if compiling is done in
+                                 Debug mode or if the sample is using Dynamic Parallelism.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="notices-header"><a name="notices-header" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#notices-header" name="notices-header" shape="rect">Notices</a></h2>
+                  <div class="topic reference nested1" id="notice"><a name="notice" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#notice" name="notice" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Notice</h3>
+                           <p class="p">ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER DOCUMENTS (TOGETHER AND
+                              SEPARATELY, "MATERIALS") ARE BEING PROVIDED "AS IS." NVIDIA MAKES NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY, OR OTHERWISE
+                              WITH RESPECT TO THE MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS
+                              FOR A PARTICULAR PURPOSE. 
+                           </p>
+                           <p class="p">Information furnished is believed to be accurate and reliable. However, NVIDIA Corporation assumes no responsibility for the
+                              consequences of use of such information or for any infringement of patents or other rights of third parties that may result
+                              from its use. No license is granted by implication of otherwise under any patent rights of NVIDIA Corporation. Specifications
+                              mentioned in this publication are subject to change without notice. This publication supersedes and replaces all other information
+                              previously supplied. NVIDIA Corporation products are not authorized as critical components in life support devices or systems
+                              without express written approval of NVIDIA Corporation.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="trademarks"><a name="trademarks" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#trademarks" name="trademarks" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Trademarks</h3>
+                           <p class="p">NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation
+                              in the U.S. and other countries.  Other company and product names may be trademarks of
+                              the respective companies with which they are associated.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="copyright-past-to-present"><a name="copyright-past-to-present" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#copyright-past-to-present" name="copyright-past-to-present" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Copyright</h3>
+                           <p class="p">© <span class="ph">2007</span>-<span class="ph">2014</span> NVIDIA
+                              Corporation. All rights reserved.
+                           </p>
+                           <p class="p">This product includes software developed by the Syncro Soft SRL (http://www.sync.ro/).</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <hr id="contents-end"></hr>
+               
+            </article>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script></body>
+</html>
